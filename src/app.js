@@ -2,7 +2,8 @@ import express from 'express'
 import path from "path";
 import url from "url";
 
-
+import productosRouter from "./routes/producto.route.js";
+import { pedidosRouter, detallePedidoRouter } from "./routes/pedidos.route.js";
 //setting
 const app= express()
 app.set("PORT",5000)
@@ -16,14 +17,12 @@ console.log(__dirname)
 //middlewares
 //tengo que configurar que mi app acepte json
 app.use(express.json())  // Envia recibe json manejarlos
+app.use(express.static(path.join(__dirname, "../frontend"))); //da acceso a todos los archivos 
+app.use('/img', express.static(path.join(__dirname, '/public/img')));
 
 
-//routes rutas importadas de otros archivos
-//app.use('/api/users',userRoutes);
 
 
-// middlewares
-app.use(express.static(path.join(__dirname, "../frontend/vistas")));//revision
 
 // routes
 app.get("/", (req, res) => {
@@ -31,12 +30,30 @@ app.get("/", (req, res) => {
    res.sendFile(path.join(__dirname, "../frontend/vistas/login.html"));
 });
 
-app.use("/api/productos", productosRouter);
-
 app.get("/productos", (req, res) => {
-  res.status(200).sendFile(path.join(__dirname, "../frontend/vistas/listadoProductos.html"));
-
+  //   res.status(200).send("pagina principal");
+   res.sendFile(path.join(__dirname, "../frontend/vistas/listadoProductos.html"));
 });
+
+app.get("/carrito", (req, res) => {
+  //   res.status(200).send("pagina principal");
+   res.sendFile(path.join(__dirname, "../frontend/vistas/carrito.html"));
+});
+
+
+app.get("/ticket", (req, res) => {
+  //   res.status(200).send("pagina principal");
+   res.sendFile(path.join(__dirname, "../frontend/vistas/ticket.html"));
+});
+
+
+
+
+
+
+app.use("/api/productos", productosRouter);
+app.use("/api/pedido", pedidosRouter);
+app.use("/api/detalle_pedido", detallePedidoRouter); // Aquí tienes typo
 
 
 //listener

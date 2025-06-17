@@ -1,6 +1,6 @@
 import conn from "../config/dbConfig.js";
 
-const UserDao = {
+const productoDao = {
   async getAll() {
     const selectQuery = "SELECT * FROM productos";
     console.log(await conn.query(selectQuery));
@@ -9,3 +9,5 @@ const UserDao = {
     return rows;
   }
  }
+
+ export default productoDao;
