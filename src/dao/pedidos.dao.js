@@ -21,49 +21,32 @@ const guardar = async ({ cliente, total }) => {
   return result.insertId;
 };
 
-const guardarDetalle  = async (detalles) => {
-  const createTableQuery = `
-    CREATE TABLE IF NOT EXISTS detalle_pedido (
-      id INT AUTO_INCREMENT PRIMARY KEY,
-      pedido_id INT,
-      producto_id INT,
-      cantidad INT,
-      precio_unitario DECIMAL(10,2),
-      subtotal DECIMAL(10,2),
-      imagen VARCHAR(255),
-      FOREIGN KEY (pedido_id) REFERENCES pedidos(id),
-      FOREIGN KEY (producto_id) REFERENCES productos(id)
-    )
-  `;
-
+export const guardarDetalle = async (detalles) => {
   const insertQuery = `
     INSERT INTO detalle_pedido
-    (pedido_id, producto_id, cantidad, precio_unitario, subtotal, imagen)
+    (pedido_id, producto_id, nombre_producto, imagen_producto, precio_unitario, cantidad, subtotal)
     VALUES ?
   `;
 
-  // detalles es un array de objetos
+  // Asegúrate que detalles sea un array de objetos
   const values = detalles.map(item => [
     item.pedido_id,
     item.producto_id,
-    item.cantidad,
+    item.nombre_producto,
+    item.imagen_producto,
     item.precio_unitario,
-    item.subtotal,
-    item.fecha || new Date(), // por si no se incluye desde el front
-    item.imagen
+    item.cantidad,
+    item.subtotal
   ]);
 
   try {
-    await conn.promise().query(createTableQuery);
-    const [result] = await conn.promise().query(insertQuery, [values]);
+    // Aquí quitamos el .promise() porque conn ya es conexión con promesas
+    const [result] = await conn.query(insertQuery, [values]);
     return result;
   } catch (error) {
     throw error;
   }
 };
 
+export default { guardar, guardarDetalle };
 
-
-
-
-export default { guardar,guardarDetalle };

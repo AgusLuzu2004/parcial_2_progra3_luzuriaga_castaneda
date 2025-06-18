@@ -13,10 +13,6 @@ const dbConexion = await mysql.createConnection({
   database: "users",
 });
 
-dbConexion.connect((err) => {
-  if (err) {
-    console.log(err);
-    return;
-  }
-  console.log("Conexion creada");
-});
+console.log("Conexion creada con éxito");
+
+export default dbConexion;

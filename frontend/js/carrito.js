@@ -122,51 +122,68 @@ function vaciarCarrito(){
 //     }
 // }
 function ordenar() {
-  const ordenar = document.querySelector(".finalizar")
-  
-  ordenar.addEventListener("click", () => {
+  const ordenarBtn = document.querySelector(".finalizar");
+
+  ordenarBtn.addEventListener("click", () => {
     const nombre = localStorage.getItem("nombre");
     const carrito = JSON.parse(localStorage.getItem("cart")) || [];
-    console.log(`${nombre} click para intentar hacer pedido`)
+
     if (!carrito.length) return alert("El carrito está vacío");
-  
+
     const total = carrito.reduce((acc, item) => acc + item.precio_normal * item.cantidad, 0);
-    console.log('Datos que se enviarán al backend:', {
-    cliente: nombre,
-    total,
-    items: carrito
-});
+
+    // 1️⃣ Guardar el pedido principal
     fetch("http://localhost:5000/api/pedido", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         cliente: nombre,
         total,
-      })
+      }),
     })
       .then(res => res.json())
-      .then(data => {
-        console.log("Datos del ticket que se van a enviar _________________")
-        const ticket = {
-      data,
-      cliente: nombre,
-      total,
-      fecha: new Date().toLocaleString(),
-      items: carrito,
-      };
-      localStorage.setItem("ticket", JSON.stringify(ticket));
+      .then(async data => {
+        const pedidoId = data.id; // ID generado por el backend
 
-      console.log(ticket);
+        // 2️⃣ Guardar todos los detalles en un solo POST
+        const detalles = carrito.map(item => ({
+          pedido_id: pedidoId,
+          producto_id: item.id,
+          nombre_producto: item.nombre,
+          imagen_producto: item.imagen,
+          precio_unitario: item.precio_normal,
+          cantidad: item.cantidad,
+          subtotal: item.precio_normal * item.cantidad,
+        }));
 
-        console.log("Pedido registrado:", data);
-        alert("Pedido enviado con éxito. ID: " + data.id);
-        localStorage.removeItem("cart");
+        // Envío de detalles
+        const resDetalles = await fetch("http://localhost:5000/api/detalle-pedido", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(detalles),
+        });
+
+        if (!resDetalles.ok) {
+          throw new Error("Error al guardar los detalles del pedido");
+        }
+
+        return pedidoId;
+      })
+      .then(pedidoId => {
+        alert("Pedido y detalles guardados con éxito. ID: " + pedidoId);
+        localStorage.clear();
+
+        localStorage.setItem("pedido_id", pedidoId);
+
         window.location.href = "../vistas/ticket.html";
       })
-      .catch(err => console.error("Error al registrar el pedido:", err));
+      .catch(err => {
+        console.error("Error al registrar el pedido o sus detalles:", err);
+        alert("Ocurrió un error al guardar el pedido. Intenta nuevamente.");
+      });
   });
 }
 
+
 renderCarrito();
 ordenar();
-// vaciarCarrito();

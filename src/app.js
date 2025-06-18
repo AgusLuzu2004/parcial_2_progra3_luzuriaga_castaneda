@@ -53,7 +53,7 @@ app.get("/ticket", (req, res) => {
 
 app.use("/api/productos", productosRouter);
 app.use("/api/pedido", pedidosRouter);
-app.use("/api/detalle_pedido", detallePedidoRouter); // Aquí tienes typo
+app.use("/api/detalle-pedido", detallePedidoRouter); 
 
 
 //listener
