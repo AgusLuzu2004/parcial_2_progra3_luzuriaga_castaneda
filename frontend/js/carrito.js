@@ -1,4 +1,4 @@
-console.log('conectado al carrito ')
+console.log('conectado al carrito');
 const ahora = new Date();
 const fechaHora = ahora.toLocaleString(); // Ej: "17/6/2025, 14:45:12"
 console.log(fechaHora);
@@ -6,13 +6,12 @@ console.log(fechaHora);
 let carrito = JSON.parse(localStorage.getItem("cart")); // obtiene el array de productos
 let  nombreLS = localStorage.getItem("nombre");
 
-
-console.log(`datos del carrito por ls ${nombreLS} `)
-console.log(`datos del carrito por ls ${JSON.stringify(carrito)} `)
+console.log(`datos del carrito por ls ${nombreLS} `);
+console.log(`datos del carrito por ls ${JSON.stringify(carrito)} `);
 
 //renderCarrito();
 
-function renderCarrito(){
+function renderCarrito() {
 
   const contenedor = document.getElementById('cart-items');
   contenedor.innerHTML = "";
@@ -31,36 +30,32 @@ function renderCarrito(){
   //   "imagen": "/img/producto_9532_1.jpg"
   // },
 
-
-  carrito.forEach((p)=>{
+  carrito.forEach((p) => {
     acum += p.precio_normal * p.cantidad;
     //cont +=1;
     
-
     const lista = document.createElement('div');
-lista.className = "contenedorItems item-block d-flex flex-wrap align-items-center justify-content-between";
+    lista.className = "contenedorItems item-block d-flex flex-wrap align-items-center justify-content-between";
 
-lista.innerHTML = `
-  <img src="${p.imagen}" alt="${p.nombre}" class="img-carrito mb-2 mb-md-0" style="width: 100px; height: 100px; object-fit: fill;">
-  <p class="item-name flex-grow-1 mb-2 mb-md-0 mx-3">${p.nombre}</p>
-  <p class="mb-2 mb-md-0 mx-3">$${p.precio_normal}</p>
-  <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-  <button type="button" class="btn btn-danger">-</button>
-  <p class="mb-2 mb-md-0 mx-3">${p.cantidad}</p>
-  <button type="button" class="btn btn-success">+</button>
-</div>
-  
-  <p class="mb-2 mb-md-0 mx-3">$${p.precio_normal * p.cantidad}</p>
-  <button class="delete-button btn btn-danger btn-sm mb-2 mb-md-0">Eliminar</button>
-`;
+    lista.innerHTML = `
+      <img src="${p.imagen}" alt="${p.nombre}" class="img-carrito mb-2 mb-md-0" style="width: 100px; height: 100px; object-fit: fill;">
+      <p class="item-name flex-grow-1 mb-2 mb-md-0 mx-3">${p.nombre}</p>
+      <p class="mb-2 mb-md-0 mx-3">$${p.precio_normal}</p>
+      <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+      <button type="button" class="btn btn-danger">-</button>
+      <p class="mb-2 mb-md-0 mx-3">${p.cantidad}</p>
+      <button type="button" class="btn btn-success">+</button>
+    </div>
+      
+      <p class="mb-2 mb-md-0 mx-3">$${p.precio_normal * p.cantidad}</p>
+      <button class="delete-button btn btn-danger btn-sm mb-2 mb-md-0">Eliminar</button>
+    `;
 
     contenedor.appendChild(lista);
 
     const btnDelete = lista.querySelector(".delete-button");
-    btnDelete.addEventListener("click",()=> eliminar(p));
+    btnDelete.addEventListener("click", () => eliminar(p));
   });
-
-
 
   // const btnVaciar = document.createElement('button');
   // btnVaciar.textContent = "Vaciar carrito"
@@ -68,22 +63,18 @@ lista.innerHTML = `
   // contenedor.appendChild(btnVaciar);
   // btnVaciar.addEventListener("click", ()=> vaciarCarrito());
 
-
   // const btnFinalizarCompra = document.createElement('button');
   // btnFinalizarCompra.textContent = "Finalizar compra";
   // btnFinalizarCompra.className = "btn btn-success";
   // contenedor.appendChild(btnFinalizarCompra);
   // btnFinalizarCompra.addEventListener("click", ()=> finalizarCompra());
-  
-
 
   total.textContent = acum;
   //contaritem.textContent = carrito.length;
   guardarCarritoLS();
 }
 
-
-function eliminar(producto){
+function eliminar(producto) {
   producto.cantidad--;
   if (producto.cantidad <= 0) {
     const indice = carrito.indexOf(producto);
@@ -96,13 +87,9 @@ function eliminar(producto){
   renderCarrito();
 }
 
-
 function guardarCarritoLS() {
   localStorage.setItem("cart", JSON.stringify(carrito));
 }
-
-
-
 
 function vaciarCarrito(){
   localStorage.clear();
@@ -110,8 +97,6 @@ function vaciarCarrito(){
   guardarCarritoLS();
   renderCarrito();
 }
-
-
 
 // function finalizarCompra(){
 //   if(carrito.length ===0){
@@ -183,7 +168,6 @@ function ordenar() {
       });
   });
 }
-
 
 renderCarrito();
 ordenar();

@@ -61,7 +61,6 @@ a {
     color: black;
 }
 
-
 /* Product Section */
 .products-section {
   padding: 20px;
@@ -188,8 +187,6 @@ a {
 .category-btn:hover {
   background-color: #c0c0c0;
 }
-
-
 
 .banner-img {
   max-height: 100vh;       /* No más alto que la pantalla */

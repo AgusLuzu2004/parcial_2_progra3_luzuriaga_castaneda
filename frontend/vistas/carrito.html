@@ -4,46 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Frutería</title>
-     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-     <!-- Fuente Montserrat -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Fuente Montserrat -->
     <!-- Bootstrap Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-
-     <link rel="stylesheet" href="/css/listadoProductos.css">
+    <link rel="stylesheet" href="/css/listadoProductos.css">
 </head>
 <body>
   <header>
-          <!-- Navbar -->
+      <!-- Navbar -->
       <nav class="navbar py-4">
-           <img src="../assets/logo.png" alt="Logo" class="logo-welcome  " >
-          
-          
-          
+          <img src="../assets/logo.png" alt="Logo" class="logo-welcome  " >
           <!-- <input type="text" placeholder="Search..." class="search-bar container mb-3""> -->
-          
-          
       </nav>
   </header>
-
-
   <h2>Carrito</h2>
   <div class="d-flex justify-content-center align-items-center">
     <button class="finalizar btn btn-danger">Ordenar</button>
     <button class="vaciar btn btn-danger">Vaciar orden</button>
   </div>
-
   <div id="cart-items" class="row">
     <p class="fs-2 text-center">No hay elementos en el carrito.</p>
   </div>
-
   <div class="cart-total">
     <p>Total: <span id="total-price">$0.00</span></p>
   </div>
-  
-  
   <script src="..\js\carrito.js"></script>
-
 </body>
 </html>

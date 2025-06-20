@@ -1,6 +1,6 @@
 import conn from "../config/dbConfig.js";
 
-const guardar = async ({ cliente, total }) => {
+const guardar = async ({cliente, total}) => {
   const createTableQuery = `
     CREATE TABLE IF NOT EXISTS pedidos (
       id INT AUTO_INCREMENT PRIMARY KEY,
@@ -48,5 +48,4 @@ export const guardarDetalle = async (detalles) => {
   }
 };
 
-export default { guardar, guardarDetalle };
-
+export default {guardar, guardarDetalle};

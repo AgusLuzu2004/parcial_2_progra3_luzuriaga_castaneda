@@ -1,13 +1,22 @@
-import mysql from "mysql2/promise"
+import mysql from "mysql2/promise";
+import envs from "./envs.js";
 
+const {host, user, password, database} = envs.db_config;
 const pool = mysql.createPool({
-  host: "localhost",
-  user: "root",
-  password: "21506005",
-  database: "autoservicio",
+  host: host,
+  user: user,
+  password: password,
+  database: database,
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0
-}); 
+});
+const connection = await pool.getConnection();
+try {
+    connection.release();
+    console.log("Database is connected");
+} catch (err) {
+    console.log(err);
+}
 
-export default pool
+export default connection;

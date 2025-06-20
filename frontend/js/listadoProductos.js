@@ -1,14 +1,9 @@
-
-
-
-console.log("conectado")
-
-
+console.log("conectado");
 
 function cargaInicial(productos) {
   const listaProductos = document.querySelector('.product-grid');
   const cartCant = document.querySelector('.cart-badge');
-  const subtotalAcum = document.querySelector('.carritoAcum')
+  const subtotalAcum = document.querySelector('.carritoAcum');
 
   listaProductos.innerHTML = "";
 
@@ -18,7 +13,7 @@ function cargaInicial(productos) {
 
     // Buscamos si este producto ya está en el carrito
     const itemEnCarrito = carrito.find(prod => prod.id === p.id);
-    const cantidad = itemEnCarrito ? itemEnCarrito.cantidad : 0;
+    const cantidad = itemEnCarrito ? itemEnCarrito.cantidad: 0;
 
   //    {
   //   "id": 1,
@@ -29,8 +24,6 @@ function cargaInicial(productos) {
   //   "categoria": "River plate",
   //   "imagen": "/img/producto_9532_1.jpg"
   // },
-
-
 
     div.innerHTML = `
       <img src="${p.imagen}" alt="${p.nombre}">
@@ -47,17 +40,17 @@ function cargaInicial(productos) {
     agregar.addEventListener('click', () => {
       agregarCarrito(p);
       const actualizado = carrito.find(prod => prod.id === p.id);
-      spanCantidad.textContent = actualizado ? actualizado.cantidad : 0;
+      spanCantidad.textContent = actualizado ? actualizado.cantidad: 0;
       cartCant.textContent = carrito.reduce((acc, va) => acc + va.cantidad, 0);
-      const subtotal = carrito.reduce((acc,va) => acc + (va.precio_normal * va.cantidad),0);
+      const subtotal = carrito.reduce((acc, va) => acc + (va.precio_normal * va.cantidad), 0);
       subtotalAcum.textContent = subtotal;
-      localStorage.setItem('subtotal',subtotal);
+      localStorage.setItem('subtotal', subtotal);
     });
   });
 
   // Al final de cargar productos, actualizá el badge del carrito
   cartCant.textContent = carrito.reduce((acc, va) => acc + va.cantidad, 0);
-   const subtotalGuardado = localStorage.getItem('subtotal');
+  const subtotalGuardado = localStorage.getItem('subtotal');
   if (subtotalGuardado && subtotalAcum) {
     subtotalAcum.textContent = subtotalGuardado;
   }
@@ -87,37 +80,37 @@ function agregarCarrito(producto) {
     - Cada vez que se escriba una letra, deben mostrarse solo los productos que coincidan con el texto ingresado.
 */
 
-function filtro(productos){
+function filtro(productos) {
   const input = document.querySelector('input');
-  input.addEventListener("keyup", (e)=>{
+  input.addEventListener("keyup", (e) => {
     const valorBuscado= e.target.value.toLowerCase().trim();
 
-    if (valorBuscado.length >2){
+    if (valorBuscado.length > 2) {
       const filtrado = productos.filter(p => p.nombre.includes(valorBuscado));
       cargaInicial(filtrado);
-    }else{
+    } else {
       cargaInicial(productos);
     }
-  })
+  });
   
 }
+
 function vaciarCarrito(){
   localStorage.clear();
   carrito =[];
   guardarCarritoLS();
-  
 }
 
 function salir(){
   const btnSalir = document.querySelector('.salir');
 
-  btnSalir.addEventListener('click',()=> {
+  btnSalir.addEventListener('click', () => {
     const confirmacion = confirm('Seguro que deseas salir tu orden se perdera');
-    if (confirmacion){
+    if (confirmacion) {
       vaciarCarrito();
       window.location.href = "/";
     }
-  })
+  });
 }
 
 // Guarda el carrito 
@@ -126,7 +119,7 @@ function guardarCarritoLS() {
 }
 
 
-function bienvenida(){
+function bienvenida() {
   const spanBienvenida = document.querySelector('.bienvenida');
   spanBienvenida.textContent = `Bienvenido ${localStorage.getItem('nombre')}`;
 }

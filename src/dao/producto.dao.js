@@ -8,6 +8,6 @@ const productoDao = {
     const [rows] = await conn.query(selectQuery);
     return rows;
   }
- }
+}
 
- export default productoDao;
+export default productoDao;
