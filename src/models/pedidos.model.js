@@ -10,18 +10,23 @@ const Pedido = sequelize.define("pedidos", {
         primaryKey: true
     },
     // columna
-    cliente: {
-        type: DataTypes.STRING,
+    usuario_id: {
+        type: DataTypes.INTEGER,
         allowNull: false
     },
     // columna
     fecha: {
         type: DataTypes.DOUBLE,
-        defaultValue: DataTypes.NOW
+        defaultValue: DataTypes.NOW,
+        allowNull: true
     },
     total: {
         type: DataTypes.DECIMAL(10, 2),
         allowNull: false
+    },
+    estado: {
+        type: DataTypes.ENUM("pendiente", "pagado", "enviado", "entregado", "cancelado"),
+        defaultValue: "pendiente"
     }
 }, 
 {
@@ -30,6 +35,11 @@ const Pedido = sequelize.define("pedidos", {
 });
 
 const DetallePedido = sequelize.define("detalle_pedido", {
+    id: {
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true
+    },
     pedido_id: {
         type: DataTypes.INTEGER,
         allowNull: false
@@ -43,7 +53,8 @@ const DetallePedido = sequelize.define("detalle_pedido", {
         allowNull: false
     },
     imagen_producto: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        allowNull: true
     },
     precio_unitario: {
         type: DataTypes.DECIMAL(10, 2),

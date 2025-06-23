@@ -131,14 +131,13 @@ function init() {
   console.log(carrito);
   fetch("http://localhost:5000/api/productos")
     .then(res => res.json())
-    .then(productos => {
-      //console.log(productos);
+    .then(data => {
+      const productos = data.payload;
       bienvenida();
       cargaInicial(productos);
       salir();
       // filtro(productos);
       //renderCarrito();
-
     });
 }
 

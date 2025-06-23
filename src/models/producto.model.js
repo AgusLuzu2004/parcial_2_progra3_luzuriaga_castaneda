@@ -12,6 +12,10 @@ const Producto = sequelize.define("productos", {
         type: DataTypes.STRING,
         allowNull: false
     },
+    descripcion: {
+        type: DataTypes.TEXT,
+        allowNull: true
+    },
     precio: {
         type: DataTypes.DECIMAL(10, 2),
         allowNull: false
@@ -20,8 +24,13 @@ const Producto = sequelize.define("productos", {
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    imagen: {
-        type: DataTypes.STRING
+    imagen_url: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },
+    categoria_id: {
+        type: DataTypes.INTEGER,
+        allowNull: true
     }
 },
 {
