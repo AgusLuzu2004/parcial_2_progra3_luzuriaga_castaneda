@@ -1,8 +1,27 @@
 // services
 import Producto from "../models/producto.model.js";
+import {Op} from "sequelize";
 
-export const getProducto = async () => {
-    return await Producto.findAll();//select * from productos
+export const getProducto = async ({limit = 10, offset = 0}) => {
+    return await Producto.findAndCountAll({
+        limit: limit,
+        offset: offset,
+        order: [["id", "DESC"]]
+    });//select * from productos
+};
+
+export const getProductoWithQuery = async (query) => {
+    return await Producto.findAndCountAll({
+        where: {
+            [Op.and]: [
+                query.nombre
+                ? {
+                    nombre: {[Op.like]: `${query.nombre}%`}
+                }
+                : null
+            ].filter(Boolean)
+        }
+    });
 };
 
 export const create = async (producto) => {
@@ -16,5 +35,3 @@ export const findPk = async (id) => {
 export const update = async (producto, id) => {
     return Producto.update(producto, {where: {id: id}});
 };
-
-// export default { getProducto };

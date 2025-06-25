@@ -132,7 +132,7 @@ function init() {
   fetch("http://localhost:5000/api/productos")
     .then(res => res.json())
     .then(data => {
-      const productos = data.payload;
+      const productos = data.payload.rows;
       bienvenida();
       cargaInicial(productos);
       salir();

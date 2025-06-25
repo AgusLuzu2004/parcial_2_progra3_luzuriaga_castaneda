@@ -10,8 +10,8 @@ const Pedido = sequelize.define("pedidos", {
         primaryKey: true
     },
     // columna
-    usuario_id: {
-        type: DataTypes.INTEGER,
+    cliente: {
+        type: DataTypes.STRING,
         allowNull: false
     },
     // columna

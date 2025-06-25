@@ -58,25 +58,30 @@ import detallePedidoRouter from "./routes/pedidos.route.js";
 import productoRouter from "./routes/producto.route.js";
 import sequelize from "./config/db-sequelize.js";
 import envs from "./config/envs.js";
+import cors from "cors";
 //settings
 const app = express();
 app.set("PORT", envs.port || 5000);
 
 const initializeConnection = async () => {
     try {
-        await sequelize.sync()
+        await sequelize.sync();
         console.log("Database sincronizada");
         
     } catch (error) {
-        console.error(error)
+        console.error(error);
     }
-}
+};
 
 // middlewares
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "../frontend"))); //da acceso a todos los archivos 
 app.use("/img", express.static(path.join(__dirname, "/public/img")));
 app.use(express.urlencoded({extended: true}));
+
+app.use(cors({
+  origin: "http://127.0.0.1:5500"
+}));
 
 // routes
 app.get("/", (req, res) => {
