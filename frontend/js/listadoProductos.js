@@ -87,19 +87,26 @@ function agregarCarrito(producto) {
     - Cada vez que se escriba una letra, deben mostrarse solo los productos que coincidan con el texto ingresado.
 */
 
-function filtro(productos){
-  const input = document.querySelector('input');
-  input.addEventListener("keyup", (e)=>{
-    const valorBuscado= e.target.value.toLowerCase().trim();
+function filtro(productos) {
+  const categoriaRiver = document.querySelector(".river");
+  const categoriaBoca = document.querySelector(".boca");
+  const sinFiltro = document.querySelector(".allProducts")
 
-    if (valorBuscado.length >2){
-      const filtrado = productos.filter(p => p.nombre.includes(valorBuscado));
-      cargaInicial(filtrado);
-    }else{
-      cargaInicial(productos);
-    }
+  categoriaRiver.addEventListener("click", () => {
+    const filtrados = productos.filter(p => p.categoria.toLowerCase() === "river plate");
+    cargaInicial(filtrados);
+  });
+
+  categoriaBoca.addEventListener("click", () => {
+    const filtrados = productos.filter(p => p.categoria.toLowerCase() === "boca juniors");
+    cargaInicial(filtrados);
+  });
+
+  sinFiltro.addEventListener("click",() => {
+    cargaInicial(productos)
   })
-  
+
+
 }
 function vaciarCarrito(){
   localStorage.clear();
@@ -140,8 +147,9 @@ function init() {
     .then(res => res.json())
     .then(productos => {
       //console.log(productos);
+      filtro(productos.payload)
       bienvenida();
-      cargaInicial(productos);
+      cargaInicial(productos.payload);
       salir();
       // filtro(productos);
       //renderCarrito();

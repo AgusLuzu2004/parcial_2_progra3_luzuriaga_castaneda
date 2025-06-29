@@ -2,7 +2,9 @@ import express from 'express'
 import path from "path";
 import url from "url";
 import productosRouter from "./routes/producto.route.js";
+//import DetallePedido from './models/detalle_pedido.model.js';
 // import { pedidosRouter, detallePedidoRouter } from "./routes/pedidos.route.js";
+import DetallePedido from './routes/detalle_pedido.route.js';
 import pedidosRoute from "./routes/pedidos.route.js";
 import envs from './config/envs.js'
 import sequelize from './config/db-sequelize.js';
@@ -62,7 +64,7 @@ app.get("/ticket", (req, res) => {
 
 
 
-
+app.use("/api/detalle_pedido",DetallePedido)
 app.use("/api/productos", productosRouter);
 app.use("/api/pedidos", pedidosRoute); // desde esta api hace get , put, update, post
 // app.use("/api/detalle-pedido", detallePedidoRouter); 

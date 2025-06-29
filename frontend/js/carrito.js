@@ -133,7 +133,7 @@ function ordenar() {
     const total = carrito.reduce((acc, item) => acc + item.precio_normal * item.cantidad, 0);
 
     // 1️⃣ Guardar el pedido principal
-    fetch("http://localhost:5000/api/pedido", {
+    fetch("http://localhost:5000/api/pedidos", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -143,8 +143,8 @@ function ordenar() {
     })
       .then(res => res.json())
       .then(async data => {
-        const pedidoId = data.id; // ID generado por el backend
-
+        const pedidoId = data.payload.id;; // ID generado por el backend
+        console.log(`Log pedido ir ERRORRR ${pedidoId}`)
         // 2️⃣ Guardar todos los detalles en un solo POST
         const detalles = carrito.map(item => ({
           pedido_id: pedidoId,
@@ -153,11 +153,11 @@ function ordenar() {
           imagen_producto: item.imagen,
           precio_unitario: item.precio_normal,
           cantidad: item.cantidad,
-          subtotal: item.precio_normal * item.cantidad,
+          subtotal:item.precio_normal * item.cantidad
         }));
 
         // Envío de detalles
-        const resDetalles = await fetch("http://localhost:5000/api/detalle-pedido", {
+        const resDetalles = await fetch("http://localhost:5000/api/detalle_pedido", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(detalles),
@@ -171,7 +171,7 @@ function ordenar() {
       })
       .then(pedidoId => {
         alert("Pedido y detalles guardados con éxito. ID: " + pedidoId);
-        localStorage.clear();
+        
 
         localStorage.setItem("pedido_id", pedidoId);
 
