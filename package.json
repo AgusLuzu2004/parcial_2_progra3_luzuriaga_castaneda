@@ -13,8 +13,10 @@
   "license": "ISC",
   "description": "Autoservicio de futbol",
   "dependencies": {
+    "dotenv": "^17.0.0",
     "express": "^5.1.0",
     "mysql2": "^3.14.1",
-    "nodemon": "^3.1.10"
+    "nodemon": "^3.1.10",
+    "sequelize": "^6.37.7"
   }
 }
