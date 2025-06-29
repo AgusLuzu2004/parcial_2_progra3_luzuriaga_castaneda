@@ -1,13 +1,13 @@
-// import conn from "../config/dbConfig.js";
+import conn from "../config/dbConfig.js";
 
-// const productoDao = {
-//   async getAll() {
-//     const selectQuery = "SELECT * FROM productos";
-//     console.log(await conn.query(selectQuery));
+const productoDao = {
+  async getAll() {
+    const selectQuery = "SELECT * FROM productos";
+    console.log(await conn.query(selectQuery));
 
-//     const [rows] = await conn.query(selectQuery);
-//     return rows;
-//   }
-//  }
+    const [rows] = await conn.query(selectQuery);
+    return rows;
+  }
+ }
 
-//  export default productoDao;
+ export default productoDao;

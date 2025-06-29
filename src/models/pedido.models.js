@@ -2,7 +2,7 @@ import { DataTypes } from "sequelize";
 import sequelize from "../config/db-sequelize.js";
 
 const Pedido = sequelize.define(
-  "pedidos", // debe ser EXACTO el nombre de tu tabla
+  "pedidos",  // es el nombre de la tabla en la BD
   {
     id: {
       type: DataTypes.INTEGER,

@@ -1,3 +1,7 @@
+// QUEDA DE MUESTRA EN CASO DE HACER UNA CONEXION SIN UN ORM
+
+
+
 // import mysql from "mysql2/promise"
 // import envs from './envs.js'
 

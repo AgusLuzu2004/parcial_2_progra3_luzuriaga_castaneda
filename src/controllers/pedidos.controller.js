@@ -1,4 +1,4 @@
-import {getPedidos} from "../service/pedidos.service.js"
+import {getPedidos,create,findPk,update} from "../service/pedidos.service.js"
 
 export const getAllPedidos = async (req,res)=>{
   try {
@@ -11,7 +11,47 @@ export const getAllPedidos = async (req,res)=>{
   }
 }
 
+export const createPedido = async (req,res) =>{
+  try {
+    const {cliente,total} = req.body
 
+    //validacion sencilla if (!cliente || !total || total === 0 ) return res.status(400).json({message: "Campos invalidos"})
+    const newPedido = await create({cliente,total})
+    res.status(201).json({message:"Pedido creado con exito",payload: newPedido})
+
+  } catch (error) {
+    res.status(500).json({message:"Error interno del servidor",err: error.message});
+  }
+}
+
+
+export const findPedido = async(req,res)=>{
+  try {
+    const {id} = req.params;
+    const pedidoFound = await findPk(id);
+    res.status(200).json({message:"Pedido encontrado", payload: pedidoFound })
+  } catch (error) {
+    res.status(400).json({message:"Error interno del servidor en findPedido",err:error.message})
+  }
+}
+
+export const updatePedido= async(req,res) =>{
+  const { id } = req.params;
+  const pedido = req.body;
+
+  try {
+    const resultado = await update(pedido, id);
+
+    // resultado = [número de filas actualizadas], o un objeto si usás `returning: true`
+    if (resultado[0] === 0) {
+      return res.status(404).json({ message: "Pedido no encontrado o sin cambios" });
+    }
+
+    res.status(200).json({ message: "Pedido actualizado correctamente" });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
 
 
 
