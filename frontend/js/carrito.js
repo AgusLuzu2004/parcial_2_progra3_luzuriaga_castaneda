@@ -105,10 +105,14 @@ function guardarCarritoLS() {
 
 
 function vaciarCarrito(){
-  localStorage.clear();
-  carrito =[];
-  guardarCarritoLS();
-  renderCarrito();
+  const btnVaciar = document.querySelector(".vaciar");
+  btnVaciar.addEventListener("click",()=>{
+    
+    localStorage.clear();
+    carrito =[];
+    guardarCarritoLS();
+    renderCarrito();
+  })
 }
 
 
@@ -187,3 +191,5 @@ function ordenar() {
 
 renderCarrito();
 ordenar();
+vaciarCarrito();
+
