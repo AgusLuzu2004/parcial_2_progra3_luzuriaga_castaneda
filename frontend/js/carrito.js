@@ -90,11 +90,14 @@ function guardarCarritoLS() {
   localStorage.setItem("cart", JSON.stringify(carrito));
 }
 
-function vaciarCarrito(){
-  localStorage.clear();
-  carrito =[];
-  guardarCarritoLS();
-  renderCarrito();
+function vaciarCarrito() {
+  const btnVaciar = document.querySelector(".vaciar");
+  btnVaciar.addEventListener("click", () => {
+    localStorage.clear();
+    carrito = [];
+    guardarCarritoLS();
+    renderCarrito();
+  });
 }
 
 // function finalizarCompra(){
@@ -169,3 +172,4 @@ function ordenar() {
 
 renderCarrito();
 ordenar();
+vaciarCarrito();
