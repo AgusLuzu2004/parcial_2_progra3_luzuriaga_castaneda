@@ -7,7 +7,8 @@ const Pedido = sequelize.define("pedidos", {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
-        primaryKey: true
+        primaryKey: true,
+        allowNull: false
     },
     // columna
     cliente: {
@@ -16,62 +17,18 @@ const Pedido = sequelize.define("pedidos", {
     },
     // columna
     fecha: {
-        type: DataTypes.DOUBLE,
+        type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
-        allowNull: true
-    },
-    total: {
-        type: DataTypes.DECIMAL(10, 2),
         allowNull: false
     },
-    estado: {
-        type: DataTypes.ENUM("pendiente", "pagado", "enviado", "entregado", "cancelado"),
-        defaultValue: "pendiente"
+    total: {
+        type: DataTypes.FLOAT,
+        allowNull: false
     }
 }, 
 {
-    tableName: "pedidos",
+    freezeTableName: true,
     timestamps: false
 });
 
-const DetallePedido = sequelize.define("detalle_pedido", {
-    id: {
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
-        primaryKey: true
-    },
-    pedido_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false
-    },
-    producto_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false
-    },
-    nombre_producto: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    imagen_producto: {
-        type: DataTypes.STRING,
-        allowNull: true
-    },
-    precio_unitario: {
-        type: DataTypes.DECIMAL(10, 2),
-        allowNull: false
-    },
-    cantidad: {
-        type: DataTypes.INTEGER,
-        allowNull: false
-    },
-    subtotal: {
-        type: DataTypes.DECIMAL(10, 2),
-        allowNull: false
-    }
-},
-{
-    tableName: "detalle_pedido",
-    timestamps: false
-});
-
-export default Pedido; DetallePedido;
+export default Pedido;

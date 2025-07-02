@@ -8,46 +8,34 @@ const Producto = sequelize.define("productos", {
         autoIncrement: true,
         primaryKey: true
     },
+    sku: {
+        type: DataTypes.STRING(50),
+        allowNull: false
+    },
     nombre: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(255),
         allowNull: false
     },
-    descripcion: {
-        type: DataTypes.TEXT,
-        allowNull: true
-    },
-    precio: {
-        type: DataTypes.DECIMAL(10, 2),
+    activo: {
+        type: DataTypes.BOOLEAN,
         allowNull: false
     },
-    stock: {
+    precio_normal: {
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    imagen_url: {
-        type: DataTypes.STRING,
-        allowNull: true
+    categoria: {
+        type: DataTypes.STRING(100),
+        allowNull: false
     },
-    categoria_id: {
-        type: DataTypes.INTEGER,
-        allowNull: true
+    imagen: {
+        type: DataTypes.STRING(255),
+        allowNull: false
     }
 },
 {
-    tableName: "productos",
+    freezeTableName: true,
     timestamps: false
 });
 
-const Productos = {
-    async getAll() {
-        try {
-            const productos = await Producto.findAll();
-            console.log(productos.map(p => p.toJSON())); // para ver datos limpios
-            return productos;
-        } catch (error) {
-            console.error("Error al obtener productos:", error);
-            throw error;
-        }
-}};
-
-export default Producto; Productos;
+export default Producto;

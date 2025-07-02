@@ -57,20 +57,18 @@ function cargaInicial(productos) {
 
 }
 
-
 function agregarCarrito(producto) {
   const itemEnCarrito = carrito.find(p => p.id === producto.id);
   if (itemEnCarrito) {
 
     itemEnCarrito.cantidad += 1;
   } else {
-    carrito.push({ ...producto, cantidad: 1,img: producto.imagen});
+    carrito.push({...producto, cantidad: 1,img: producto.imagen});
   }
 
   guardarCarritoLS();
   //renderCarrito();
 }
-
 
 /*  
     Punto 4 _________________________
@@ -81,23 +79,29 @@ function agregarCarrito(producto) {
 */
 
 function filtro(productos) {
-  const input = document.querySelector('input');
-  input.addEventListener("keyup", (e) => {
-    const valorBuscado= e.target.value.toLowerCase().trim();
+  const categoriaRiver = document.querySelector(".river");
+  const categoriaBoca = document.querySelector(".boca");
+  const sinFiltro = document.querySelector(".allProducts")
 
-    if (valorBuscado.length > 2) {
-      const filtrado = productos.filter(p => p.nombre.includes(valorBuscado));
-      cargaInicial(filtrado);
-    } else {
-      cargaInicial(productos);
-    }
+  categoriaRiver.addEventListener("click", () => {
+    const filtrados = productos.filter(p => p.categoria.toLowerCase() === "river plate");
+    cargaInicial(filtrados);
+  });
+
+  categoriaBoca.addEventListener("click", () => {
+    const filtrados = productos.filter(p => p.categoria.toLowerCase() === "boca juniors");
+    cargaInicial(filtrados);
+  });
+
+  sinFiltro.addEventListener("click", () => {
+    cargaInicial(productos)
   });
   
 }
 
 function vaciarCarrito(){
   localStorage.clear();
-  carrito =[];
+  carrito = [];
   guardarCarritoLS();
 }
 
@@ -118,12 +122,10 @@ function guardarCarritoLS() {
   localStorage.setItem("cart", JSON.stringify(carrito));
 }
 
-
 function bienvenida() {
   const spanBienvenida = document.querySelector('.bienvenida');
   spanBienvenida.textContent = `Bienvenido ${localStorage.getItem('nombre')}`;
 }
-
 
 // Función inicializadora
 function init() {
@@ -131,10 +133,10 @@ function init() {
   console.log(carrito);
   fetch("http://localhost:5000/api/productos")
     .then(res => res.json())
-    .then(data => {
-      const productos = data.payload.rows;
+    .then(productos => {
+      filtro(productos.payload)
       bienvenida();
-      cargaInicial(productos);
+      cargaInicial(productos.payload);
       salir();
       // filtro(productos);
       //renderCarrito();

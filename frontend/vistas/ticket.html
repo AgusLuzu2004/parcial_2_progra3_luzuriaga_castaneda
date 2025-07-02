@@ -32,17 +32,19 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm px-4">
       <a class="navbar-brand d-flex align-items-center" href="#">
         <img src="../assets/logo.png" alt="Logo" class="logo me-2">
-    </a>
-</nav>
-<span class="fw-bold fs-2 text-center">Gracias por tu compra</span>
+      </a>
+    </nav>
+    <span class="fw-bold fs-2 text-success text-center">Gracias por tu compra</span>
   </header>
+  <button class="btn btn-success imprimirTicket">Imprimir ticket</button>
+  <button class="btn btn-success reiniciar">Salir</button>
   <!-- Contenido del ticket -->
   <div class="card shadow ticket-card mt-5">
     <div class="card-body">
       <h4 class="card-title mb-4">Resumen del Pedido</h4>
       <div class="mb-3">
-        <strong>ID del Pedido:</strong> <span id="pedido-id">#12345</span><br>
-        <strong>Cliente:</strong> <span id="pedido-nombre">Juan Pérez</span><br>
+        <strong>ID del Pedido:</strong> <span id="pedido-id"></span><br>
+        <strong>Cliente:</strong> <span id="pedido-nombre"></span><br>
       </div>
       <div class="table-responsive">
         <table class="table table-bordered align-middle">
@@ -57,40 +59,17 @@
           </thead>
           <tbody id="detalle-productos">
             <!-- JS llenará esto dinámicamente -->
-            <tr>
-              <td><img src="/img/producto_9532_1.jpg" class="img-prod" alt="Producto"></td>
-              <td>Reloj River Plate</td>
-              <td>2</td>
-              <td>$10.000</td>
-              <td>$20.000</td>
-            </tr>
-            <tr>
-              <td><img src="/img/boca1.jpg" class="img-prod" alt="Producto"></td>
-              <td>Gorra Boca Juniors</td>
-              <td>1</td>
-              <td>$5.000</td>
-              <td>$5.000</td>
-            </tr>
           </tbody>
         </table>
       </div>
       <div class="text-end mt-3">
-        <h5>Total: <span class="text-success" id="total-general">$25.000</span></h5>
+        <h5>Total: <span class="text-success" id="total-general"></span></h5>
       </div>
     </div>
   </div>
-  <button class="btn btn-success">Imprimir ticket</button>
-  <button class="btn btn-success">Salir</button>
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <!-- Script opcional para rellenar con datos dinámicos desde localStorage -->
-  <script>
-    // Aquí podés rellenar dinámicamente con los datos del pedido si los tenés guardados
-    console.log(pedido);
-    const pedido = JSON.parse(localStorage.getItem("pedido")) || {};
-    document.getElementById('pedido-id').textContent = pedido.id;
-    document.getElementById('pedido-nombre').textContent = pedido.nombre;
-    // etc.
-  </script>
+  <script src="../js/ticket.js"></script>
 </body>
 </html>
