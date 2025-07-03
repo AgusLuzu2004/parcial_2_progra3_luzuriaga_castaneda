@@ -55,6 +55,31 @@ function renderCarrito() {
 
     const btnDelete = lista.querySelector(".delete-button");
     btnDelete.addEventListener("click", () => eliminar(p));
+
+    const btnRestar = lista.querySelector(".btn-danger"); // Botón -
+    const btnSumar = lista.querySelector(".btn-success"); // Botón +
+
+    btnRestar.addEventListener("click", () => {
+      if (p.cantidad > 1) {
+        p.cantidad--;
+      } else {
+        const confirmar = confirm("¿Querés eliminar este producto del carrito?");
+        if (confirmar) {
+          const indice = carrito.indexOf(p);
+          if (indice !== -1) carrito.splice(indice, 1);
+        } else {
+          return;
+        }
+      }
+      guardarCarritoLS();
+      renderCarrito();
+    });
+
+    btnSumar.addEventListener("click", () => {
+      p.cantidad++;
+      guardarCarritoLS();
+      renderCarrito();
+    });
   });
 
   // const btnVaciar = document.createElement('button');
@@ -80,6 +105,11 @@ function eliminar(producto) {
     const indice = carrito.indexOf(producto);
     if (indice !== -1) {
       carrito.splice(indice, 1);
+      const confirmar = confirm("¿Querés eliminar este producto del carrito?");
+        if (confirmar) {
+          const indice = carrito.indexOf(producto);
+          if (indice !== -1) carrito.splice(indice, 1);
+        }
     }
   }
   guardarCarritoLS();

@@ -5,7 +5,7 @@ body {
   box-sizing: border-box;
 }
 
-.img-carrito{
+.img-carrito {
   height: 100px;
   width: 100px;
   object-fit: fill;
@@ -44,6 +44,11 @@ a {
 
 .cart {
   font-size: 1rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin: 0; /* Elimina cualquier margen heredado */
+  right: 0;
 }
 
 .cart > a {
@@ -57,7 +62,7 @@ a {
   color: #000000;
 }
 
-.cart > span{
+.cart > span {
     color: black;
 }
 
@@ -155,7 +160,7 @@ a {
   margin: 0 auto;
 }
 
-.contenedorItems{
+.contenedorItems {
   border: 1px solid black;
   border-radius: 10px;
   overflow: hidden;

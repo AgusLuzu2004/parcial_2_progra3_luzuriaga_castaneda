@@ -9,6 +9,7 @@
   <!-- Fuente Montserrat -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
   <!-- Estilos personalizados -->
+  <link rel="stylesheet" href="/css/modoOscuro.css">
   <style>
     html, body {
       height: 100vh;
@@ -46,6 +47,10 @@
       <img src="../assets/logo.png" alt="Logo" class="logo-welcome" style="height: 30px;"> autoservicio, explorá nuestros productos oficiales y retiralos al momento.
     </marquee>
   </div>
+  <div class="form-check form-switch mb-0">
+    <input class="form-check-input" type="checkbox" role="switch" id="modoToggle">
+    <label class="form-check-label" for="modoToggle">🌙</label>
+  </div>
 </nav>
   <!-- Contenido principal -->
   <main>
@@ -77,7 +82,7 @@
     </div>
   </footer>
 <script>
-  function guardarNombreLS(nombre){
+  function guardarNombreLS(nombre) {
   localStorage.setItem('nombre',nombre)
   }
   function obtenerNombre(){
@@ -89,7 +94,7 @@
     event.preventDefault(); // evita que se recargue la página
     const valorBuscado = valorInput.value.toLowerCase().trim();
     console.log(valorBuscado);
-    if(valorBuscado.length <= 2){
+    if (valorBuscado.length <= 2) {
       console.log(valorBuscado);
       mensaje.textContent = "Error en nombre";
       valorInput.value = "";
@@ -99,6 +104,22 @@
   window.location.href = "vistas/listadoProductos.html";
   });
   }
+  const toggle = document.getElementById('modoToggle');
+  const label = toggle.nextElementSibling;
+  const body = document.body;
+  // Al cargar, aplicar modo guardado
+  const modoGuardado = localStorage.getItem('modo');
+  if (modoGuardado === 'oscuro') {
+    body.classList.add('dark-mode');
+    toggle.checked = true;
+    label.textContent = '☀️';
+  }
+  toggle.addEventListener('change', () => {
+    body.classList.toggle('dark-mode');
+    const esOscuro = body.classList.contains('dark-mode');
+    localStorage.setItem('modo', esOscuro ? 'oscuro' : 'claro');
+    label.textContent = esOscuro ? '☀️' : '🌙';
+  });
 obtenerNombre();
 </script>
 </body>

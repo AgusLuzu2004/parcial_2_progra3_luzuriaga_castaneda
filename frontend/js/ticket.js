@@ -75,20 +75,21 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 });
 
-
 const btnsalir = document.querySelector(".reiniciar");
 btnsalir.addEventListener("click", () => {
     localStorage.clear();
     window.location.href = "http://localhost:5000/";
 });
 
-function borrarLS(){
+function borrarLS() {
     localStorage.clear();
 }
 
-function reiniciar(){
+function reiniciar() {
     setTimeout(() => {
         borrarLS();
         window.location.href = "http://localhost:5000/";
     }, 60000); // 60000 milisegundos = 1 minuto
 }
+
+reiniciar();
