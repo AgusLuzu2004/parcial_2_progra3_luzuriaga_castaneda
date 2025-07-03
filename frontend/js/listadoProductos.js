@@ -93,18 +93,10 @@ function filtro(productos) {
     cargaInicial(filtrados);
   });
 
-<<<<<<< HEAD
   sinFiltro.addEventListener("click", () => {
     cargaInicial(productos)
   });
   
-=======
-  sinFiltro.addEventListener("click",() => {
-    cargaInicial(productos)
-  })
-
-
->>>>>>> Retomando
 }
 
 function vaciarCarrito(){
@@ -142,10 +134,6 @@ function init() {
   fetch("http://localhost:5000/api/productos")
     .then(res => res.json())
     .then(productos => {
-<<<<<<< HEAD
-=======
-      //console.log(productos);
->>>>>>> Retomando
       filtro(productos.payload)
       bienvenida();
       cargaInicial(productos.payload);
