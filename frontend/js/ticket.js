@@ -75,6 +75,20 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 });
 
+document.querySelector(".imprimirTicket").addEventListener("click", () => {
+    const contenido = document.querySelector(".ticket-card"); // solo el resumen del pedido
+
+    const opciones = {
+        margin:       0.5,
+        filename:     `ticket_${Date.now()}.pdf`,
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2 },
+        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+    };
+
+    html2pdf().set(opciones).from(contenido).save();
+});
+
 const btnsalir = document.querySelector(".reiniciar");
 btnsalir.addEventListener("click", () => {
     localStorage.clear();
