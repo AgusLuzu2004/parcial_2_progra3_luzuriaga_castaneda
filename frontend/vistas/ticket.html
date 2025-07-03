@@ -37,19 +37,37 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm px-4">
       <a class="navbar-brand d-flex align-items-center" href="#">
         <img src="../assets/logo.png" alt="Logo" class="logo me-2">
+<<<<<<< HEAD
       </a>
     </nav>
     <span class="fw-bold fs-2 text-success text-center">Gracias por tu compra</span>
   </header>
   <button class="btn btn-success imprimirTicket">Imprimir ticket</button>
   <button class="btn btn-success reiniciar">Salir</button>
+=======
+    </a>
+  </nav>
+  <span class="fw-bold fs-2 text-success text-center">Gracias por tu compra</span>
+</header>
+
+<button class="btn btn-success imprimirTicket">Imprimir ticket</button>
+<button class="btn btn-success reiniciar">Salir</button>
+
+>>>>>>> Retomando
   <!-- Contenido del ticket -->
   <div class="card shadow ticket-card mt-5">
     <div class="card-body">
       <h4 class="card-title mb-4">Resumen del Pedido</h4>
       <div class="mb-3">
+<<<<<<< HEAD
         <strong>ID del Pedido:</strong> <span id="pedido-id"></span><br>
         <strong>Cliente:</strong> <span id="pedido-nombre"></span><br>
+=======
+        <strong>ID del Pedido:</strong> <span id="pedido-id"> </span><br>
+        <strong>Cliente:</strong> <span id="pedido-nombre"></span><br>
+        
+
+>>>>>>> Retomando
       </div>
       <div class="table-responsive">
         <table class="table table-bordered align-middle">
@@ -64,6 +82,10 @@
           </thead>
           <tbody id="detalle-productos">
             <!-- JS llenará esto dinámicamente -->
+<<<<<<< HEAD
+=======
+            
+>>>>>>> Retomando
           </tbody>
         </table>
       </div>
@@ -72,6 +94,7 @@
       </div>
     </div>
   </div>
+<<<<<<< HEAD
   <script>
   const toggle = document.getElementById('modoToggle');
   const label = toggle.nextElementSibling;
@@ -90,9 +113,17 @@
     label.textContent = esOscuro ? '☀️' : '🌙';
   });
   </script>
+=======
+
+
+>>>>>>> Retomando
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <!-- Script opcional para rellenar con datos dinámicos desde localStorage -->
+<<<<<<< HEAD
   <script src="../js/ticket.js"></script>
+=======
+<script src="../js/ticket.js"></script>
+>>>>>>> Retomando
 </body>
 </html>

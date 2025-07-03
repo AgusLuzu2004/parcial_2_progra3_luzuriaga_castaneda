@@ -13,6 +13,7 @@
   "license": "ISC",
   "description": "Autoservicio de futbol",
   "dependencies": {
+<<<<<<< HEAD
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
@@ -21,5 +22,12 @@
   },
   "devDependencies": {
     "nodemon": "^3.1.10"
+=======
+    "dotenv": "^17.0.0",
+    "express": "^5.1.0",
+    "mysql2": "^3.14.1",
+    "nodemon": "^3.1.10",
+    "sequelize": "^6.37.7"
+>>>>>>> Retomando
   }
 }

@@ -120,6 +120,7 @@ function guardarCarritoLS() {
   localStorage.setItem("cart", JSON.stringify(carrito));
 }
 
+<<<<<<< HEAD
 function vaciarCarrito() {
   const btnVaciar = document.querySelector(".vaciar");
   btnVaciar.addEventListener("click", () => {
@@ -128,6 +129,20 @@ function vaciarCarrito() {
     guardarCarritoLS();
     renderCarrito();
   });
+=======
+
+
+
+function vaciarCarrito(){
+  const btnVaciar = document.querySelector(".vaciar");
+  btnVaciar.addEventListener("click",()=>{
+    
+    localStorage.clear();
+    carrito =[];
+    guardarCarritoLS();
+    renderCarrito();
+  })
+>>>>>>> Retomando
 }
 
 // function finalizarCompra(){
@@ -160,7 +175,11 @@ function ordenar() {
     })
       .then(res => res.json())
       .then(async data => {
+<<<<<<< HEAD
         const pedidoId = data.payload.id; // ID generado por el backend
+=======
+        const pedidoId = data.payload.id;; // ID generado por el backend
+>>>>>>> Retomando
         console.log(`Log pedido ir ERRORRR ${pedidoId}`)
         // 2️⃣ Guardar todos los detalles en un solo POST
         const detalles = carrito.map(item => ({
@@ -170,7 +189,11 @@ function ordenar() {
           imagen_producto: item.imagen,
           precio_unitario: item.precio_normal,
           cantidad: item.cantidad,
+<<<<<<< HEAD
           subtotal: item.precio_normal * item.cantidad
+=======
+          subtotal:item.precio_normal * item.cantidad
+>>>>>>> Retomando
         }));
 
         // Envío de detalles
@@ -188,6 +211,10 @@ function ordenar() {
       })
       .then(pedidoId => {
         alert("Pedido y detalles guardados con éxito. ID: " + pedidoId);
+<<<<<<< HEAD
+=======
+        
+>>>>>>> Retomando
 
         localStorage.setItem("pedido_id", pedidoId);
 
@@ -202,4 +229,9 @@ function ordenar() {
 
 renderCarrito();
 ordenar();
+<<<<<<< HEAD
 vaciarCarrito();
+=======
+vaciarCarrito();
+
+>>>>>>> Retomando
