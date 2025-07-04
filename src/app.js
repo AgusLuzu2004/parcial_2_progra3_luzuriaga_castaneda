@@ -80,6 +80,24 @@ app.get('/admin/dashboard', async (req, res) => {
 });
 
 
+app.get('/admin/productos/:id/editar', async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const response = await fetch(`http://localhost:5000/api/productos/${id}`);
+    const result = await response.json();
+
+    const producto = result.payload;
+
+    res.render('modificar_producto', { producto });
+  } catch (error) {
+    console.error("❌ Error al obtener producto:", error.message);
+    res.status(500).send("Error al obtener el producto");
+  }
+});
+
+
+
 
 //listeners
 initializeConnection();

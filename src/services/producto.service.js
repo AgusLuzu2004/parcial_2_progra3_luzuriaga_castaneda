@@ -5,6 +5,10 @@ export const getProductos = async () => {
     return await Producto.findAll();//select * from productos
 };
 
+export const findPk = async(id)=>{
+    return await Producto.findByPk(id);
+};
+
 export const create = async (producto) => {
     return await Producto.create(producto);
 };
