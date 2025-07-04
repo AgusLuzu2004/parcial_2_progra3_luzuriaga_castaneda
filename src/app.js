@@ -7,9 +7,16 @@ import detallePedidoRouter from "./routes/detalle_pedido.route.js";
 import sequelize from "./config/db-sequelize.js";
 import envs from "./config/envs.js";
 import cors from "cors";
+import adminRoutes from './routes/user_admin.route.js';
+
+
 
 //settings
 const app = express();
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, "public/views"));
+console.log(__dirname);
+
 app.set("PORT", envs.port || 5000);
 
 const initializeConnection = async () => {
@@ -29,7 +36,8 @@ app.use("/img", express.static(path.join(__dirname, "/public/img")));
 app.use(express.urlencoded({extended: true}));
 
 app.use(cors({
-  origin: "http://127.0.0.1:5500"
+  // origin: "http://127.0.0.1:5500"
+  origin: "*"
 }));
 
 // routes
@@ -52,6 +60,26 @@ app.get("/ticket", (req, res) => {
 app.use("/api/pedidos", pedidosRouter);
 app.use("/api/productos", productosRouter);
 app.use("/api/detalle_pedido", detallePedidoRouter);
+app.use('/api/admin', adminRoutes);
+
+app.get('/admin/dashboard', async (req, res) => {
+  try {
+    const response = await fetch("http://localhost:5000/api/productos");
+    const data = await response.json();
+
+    const productos = data.payload || [];
+
+    res.render('dashboard_admin', {
+      usuario: 'admin123',
+      productos
+    });
+  } catch (error) {
+    console.error("Error al cargar productos:", error);
+    res.status(500).send("Error al cargar el dashboard");
+  }
+});
+
+
 
 //listeners
 initializeConnection();

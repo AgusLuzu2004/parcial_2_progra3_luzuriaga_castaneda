@@ -7,7 +7,9 @@ function cargaInicial(productos) {
 
   listaProductos.innerHTML = "";
 
-  productos.forEach((p) => {
+  const productosActivos = productos.filter(p => p.activo === true || p.activo === 1);
+
+  productosActivos.forEach((p) => {
     const div = document.createElement('div');
     div.className = "product-card";
 
