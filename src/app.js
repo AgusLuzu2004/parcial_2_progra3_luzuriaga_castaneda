@@ -9,8 +9,6 @@ import envs from "./config/envs.js";
 import cors from "cors";
 import adminRoutes from './routes/user_admin.route.js';
 
-
-
 //settings
 const app = express();
 app.set('view engine', 'ejs');
@@ -36,7 +34,6 @@ app.use("/img", express.static(path.join(__dirname, "/public/img")));
 app.use(express.urlencoded({extended: true}));
 
 app.use(cors({
-  // origin: "http://127.0.0.1:5500"
   origin: "*"
 }));
 
@@ -66,9 +63,7 @@ app.get('/admin/dashboard', async (req, res) => {
   try {
     const response = await fetch("http://localhost:5000/api/productos");
     const data = await response.json();
-
     const productos = data.payload || [];
-
     res.render('dashboard_admin', {
       usuario: 'admin123',
       productos
@@ -79,6 +74,7 @@ app.get('/admin/dashboard', async (req, res) => {
   }
 });
 
+<<<<<<< HEAD
 
 app.get('/admin/productos/:id/editar', async (req, res) => {
   const { id } = req.params;
@@ -99,6 +95,8 @@ app.get('/admin/productos/:id/editar', async (req, res) => {
 
 
 
+=======
+>>>>>>> f3b66a0f85dafdee3be3c1a80e2751e1afde4e60
 //listeners
 initializeConnection();
 app.listen(app.get("PORT"), () => {

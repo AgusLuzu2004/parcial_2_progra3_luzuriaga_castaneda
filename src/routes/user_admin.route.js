@@ -1,6 +1,6 @@
 // routes/hisport-admin.js
 import express from 'express';
-import { mostrarLogin, login } from '../controllers/user_admin.controller.js';
+import {mostrarLogin, login} from '../controllers/user_admin.controller.js';
 
 const router = express.Router();
 
