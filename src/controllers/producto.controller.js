@@ -53,7 +53,6 @@ export const updateProducto = async (req, res) => {
     }
 };
 
-
 export const deleteProducto = async (req, res) => {
     const {id} = req.params;
     try {
