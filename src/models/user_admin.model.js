@@ -3,7 +3,7 @@ import {DataTypes} from "sequelize";
 import sequelize from "../config/db-sequelize.js";
 import bcrypt from 'bcrypt';
 
-const Administrador = sequelize.define('Administrador', {
+const Administrador = sequelize.define('administradores', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
