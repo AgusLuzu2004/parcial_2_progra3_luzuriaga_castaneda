@@ -5,7 +5,7 @@ export const getProductos = async () => {
     return await Producto.findAll();//select * from productos
 };
 
-export const findPk = async(id)=>{
+export const findPk = async(id) => {
     return await Producto.findByPk(id);
 };
 

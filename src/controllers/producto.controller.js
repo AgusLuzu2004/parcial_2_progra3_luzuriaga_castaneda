@@ -32,28 +32,24 @@ export const createProducto = async (req, res) => {
 };
 
 export const updateProducto = async (req, res) => {
-    const { id } = req.params;
-    const { nombre, precio_normal, categoria, activo, imagen, sku } = req.body;
-
+    const {id} = req.params;
+    const {nombre, precio_normal, categoria, activo, imagen, sku} = req.body;
     // Validación
     if (!nombre || !precio_normal || !categoria || !sku) {
         return res.status(400).json({ message: "Todos los campos requeridos" });
     }
-
     try {
-        const producto = { nombre, precio_normal, categoria, activo, imagen, sku };
-
+        const producto = {nombre, precio_normal, categoria, activo, imagen, sku};
         const resultado = await update(producto, id);
         if (resultado[0] === 0) {
-            return res.status(404).json({ message: "Producto no encontrado o sin cambios" });
+            return res.status(404).json({message: "Producto no encontrado o sin cambios"});
         }
-
         res.status(200).json({
             message: "Producto actualizado correctamente",
             payload: resultado,
         });
     } catch (error) {
-        res.status(500).json({ message: "Error interno del servidor", err: error.message });
+        res.status(500).json({message: "Error interno del servidor", err: error.message});
     }
 };
 

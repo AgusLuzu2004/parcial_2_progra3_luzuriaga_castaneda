@@ -74,10 +74,8 @@ app.get('/admin/dashboard', async (req, res) => {
   }
 });
 
-
-
 app.get('/admin/productos/:id/editar', async (req, res) => {
-  const { id } = req.params;
+  const {id} = req.params;
 
   try {
     const response = await fetch(`http://localhost:5000/api/productos/${id}`);
@@ -85,7 +83,7 @@ app.get('/admin/productos/:id/editar', async (req, res) => {
 
     const producto = result.payload;
 
-    res.render('modificar_producto', { producto });
+    res.render('modificar_producto', {producto});
   } catch (error) {
     console.error("❌ Error al obtener producto:", error.message);
     res.status(500).send("Error al obtener el producto");
@@ -95,9 +93,6 @@ app.get('/admin/productos/:id/editar', async (req, res) => {
 app.get('/admin/productos/nuevo-producto', (req, res) => {
   res.render('alta_producto'); 
 });
-
-
-
 
 //listeners
 initializeConnection();

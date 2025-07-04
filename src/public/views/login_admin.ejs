@@ -17,7 +17,7 @@
             margin: 0;
             font-family: 'Montserrat', sans-serif;
             overflow: hidden;
-            background-image: url('../assets/Trama2.jpg');
+            background-image: url('/assets/Trama2.jpg');
             background-repeat: no-repeat;
             background-position: center;
             background-attachment: fixed;
@@ -39,6 +39,12 @@
             margin-top: 1rem;
             font-weight: 600;
         }
+        marquee {
+            color: var(--marquee-color, black);
+        }
+        body.dark-mode marquee {
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -47,7 +53,7 @@
         <div class="container-fluid d-flex align-items-center">
             <marquee behavior="scroll" direction="left" class="flex-grow-1 me-3 fs-3 fw-bold">
                 Bienvenido a
-                <img src="/frontend/assets/logo.png" alt="Logo" class="logo-welcome" style="height: 30px;" />
+                <img src="/assets/logo.png" alt="Logo" class="logo-welcome" style="height: 30px;" />
                 autoservicio, explorá nuestros productos oficiales y retiralos
                 al momento.
             </marquee>
@@ -65,7 +71,7 @@
                 <div class="card p-5 shadow-sm">
                     <form id="loginForm" class="formulario-entrada">
                         <div class="text-center mb-4">
-                            <img src="../assets/logo.png" alt="Logo"
+                            <img src="/assets/logo.png" alt="Logo"
                                 class="logo" />
                         </div>
                         <div class="mb-3">

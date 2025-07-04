@@ -13,9 +13,9 @@
         }
     </style>
     <link rel="stylesheet" href="../css/listadoProductos.css">
-    <link rel="stylesheet" href="frontend\css\modoOscuro.css">
+    <link rel="stylesheet" href="/css/modoOscuro.css">
 </head>
-<body class="bg-light">
+<body>
     <nav class="navbar py-4">
         <img src="../assets/logo.png" alt="Logo" class="logo-welcome">        
         <!-- <input type="text" placeholder="Search..." class="search-bar container mb-3""> -->        
@@ -30,10 +30,8 @@
   <div class="container my-5">
     <h2 class="mb-4 text-center">Productos Registrados</h2>
     <div>
-
         <a href="/admin/productos/nuevo-producto" class="btn btn-success w-25">Agregar producto</a>
     </div>
-
     <table class="table table-bordered table-hover">
       <thead class="table-dark">
         <tr>
@@ -66,41 +64,53 @@
       </tbody>
     </table>
   </div>
-
   <script>
     function editarProducto(id) {
       alert(`Editar producto con ID: ${id}`);
       window.location.href = `/admin/productos/${id}/editar/`;
     }
-
     async function inactivarProducto(id) {
-  const confirmado = confirm("¿Seguro que querés inactivar este producto?");
-  if (!confirmado) return;
-
-  try {
-    const response = await fetch(`/api/productos/desactivar/${id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json'
+      const confirmado = confirm("¿Seguro que querés inactivar este producto?");
+      if (!confirmado) return;
+      try {
+        const response = await fetch(`/api/productos/desactivar/${id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+        const result = await response.json();
+        if (response.ok) {
+          alert("✅ Producto inactivado correctamente");
+          // Podés recargar la página si querés reflejar los cambios
+          location.reload();
+        } else {
+          alert(`❌ Error al inactivar: ${result.message}`);
+        }
+      } catch (error) {
+        console.error("Error al inactivar producto:", error);
+        alert("❌ Error del servidor o de red");
       }
-    });
-
-    const result = await response.json();
-
-    if (response.ok) {
-      alert("✅ Producto inactivado correctamente");
-      // Podés recargar la página si querés reflejar los cambios
-      location.reload();
-    } else {
-      alert(`❌ Error al inactivar: ${result.message}`);
     }
-
-  } catch (error) {
-    console.error("Error al inactivar producto:", error);
-    alert("❌ Error del servidor o de red");
-  }
-}
-
-    </script>
+  </script>
+  <script>
+    const toggle = document.getElementById('modoToggle');
+    const label = toggle.nextElementSibling;
+    const body = document.body;
+    // Verificar si ya está guardado el modo
+    const modoGuardado = localStorage.getItem('modo');
+    if (modoGuardado === 'oscuro') {
+      body.classList.add('dark-mode');
+      toggle.checked = true;
+      label.textContent = '☀️';
+    }
+    // Activar o desactivar modo oscuro manualmente
+    toggle.addEventListener('change', () => {
+      body.classList.toggle('dark-mode');
+      const esOscuro = body.classList.contains('dark-mode');
+      localStorage.setItem('modo', esOscuro ? 'oscuro' : 'claro');
+      label.textContent = esOscuro ? '☀️' : '🌙';
+    });
+  </script>
 </body>
 </html>
