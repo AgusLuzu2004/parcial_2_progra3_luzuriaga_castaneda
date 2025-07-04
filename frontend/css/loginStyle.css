@@ -1,3 +1,26 @@
 .logo-welcome {
   height: 30px;
 }
+html, body {
+  height: 100vh;
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  overflow: hidden; /* Evita el scroll */
+  background-image: url('../assets/Trama2.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  background-color: #4200f700;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+}
+main {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.logo {
+  max-width: 200px;
+}

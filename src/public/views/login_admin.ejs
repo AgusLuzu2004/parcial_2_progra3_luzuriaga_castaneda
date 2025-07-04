@@ -11,41 +11,7 @@
     <!-- Estilos personalizados (modo oscuro) -->
     <link rel="stylesheet" href="/css/listadoProductos.css">
     <link rel="stylesheet" href="/css/modoOscuro.css">
-    <style>
-        html, body {
-            height: 100vh;
-            margin: 0;
-            font-family: 'Montserrat', sans-serif;
-            overflow: hidden;
-            background-image: url('/assets/Trama2.jpg');
-            background-repeat: no-repeat;
-            background-position: center;
-            background-attachment: fixed;
-            background-color: #4200f700;
-            background-size: cover;
-            display: flex;
-            flex-direction: column;
-        }
-        main {
-            flex-grow: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .logo {
-            max-width: 200px;
-        }
-        .mensaje {
-            margin-top: 1rem;
-            font-weight: 600;
-        }
-        marquee {
-            color: var(--marquee-color, black);
-        }
-        body.dark-mode marquee {
-            color: white;
-        }
-    </style>
+    <link rel="stylesheet" href="/css/loginAdmin.css">
 </head>
 <body>
     <!-- Navbar -->
@@ -98,56 +64,7 @@
             </div>
         </div>
     </footer>
-    <script>
-        // Modo oscuro toggle
-        const toggle = document.getElementById('modoToggle');
-        const label = toggle.nextElementSibling;
-        const body = document.body;
-        const modoGuardado = localStorage.getItem('modo');
-        if (modoGuardado === 'oscuro') {
-            body.classList.add('dark-mode');
-            toggle.checked = true;
-            label.textContent = '☀️';
-        }
-        toggle.addEventListener('change', () => {
-            body.classList.toggle('dark-mode');
-            const esOscuro = body.classList.contains('dark-mode');
-            localStorage.setItem('modo', esOscuro ? 'oscuro' : 'claro');
-            label.textContent = esOscuro ? '☀️' : '🌙';
-        });
-        // Login con fetch a /api/admin/login
-        document.getElementById('loginForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const usuario = document.getElementById('usuario').value.trim();
-            const contrasena = document.getElementById('contrasena').value.trim();
-            const mensaje = document.getElementById('mensaje');
-            try {
-                const response = await fetch('/api/admin/', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        usuario,
-                        contrasena
-                    }),
-                });
-                if (response.ok) {
-                    const data = await response.json();
-                    mensaje.textContent = `✅ Bienvenido ${data.usuario}`;
-                    mensaje.style.color = 'green';
-                    // Aquí podrías redirigir, por ejemplo:
-                    window.location.href = '/admin/dashboard';
-                } else {
-                    const errorData = await response.json();
-                    mensaje.textContent = `❌ ${errorData.error || 'Login fallido'}`;
-                    mensaje.style.color = 'red';
-                }
-            } catch (err) {
-                mensaje.textContent = 'Error al conectar con el servidor';
-                mensaje.style.color = 'red';
-            }
-        });
-    </script>
+    <script src="/js/loginAdmin.js"></script>
+    <script src="/js/modoOscuro.js"></script>
 </body>
 </html>

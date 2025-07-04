@@ -11,31 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
   <!-- Estilos personalizados -->
   <link rel="stylesheet" href="/css/modoOscuro.css">
-  <style>
-    html, body {
-      height: 100vh;
-      margin: 0;
-      font-family: 'Montserrat', sans-serif;
-      overflow: hidden; /* Evita el scroll */
-      background-image: url('../assets/Trama2.jpg');
-      background-repeat: no-repeat;
-      background-position: center;
-      background-attachment: fixed;
-      background-color: #4200f700;
-      background-size: cover;
-      display: flex;
-      flex-direction: column;
-    }
-    main {
-      flex-grow: 1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .logo {
-      max-width: 200px;
-    }
-  </style>
+  <link rel="stylesheet" href="/css/loginStyle.css">
 </head>
 <body>
   <!-- Navbar -->
@@ -85,46 +61,7 @@
       </div>
     </div>
   </footer>
-<script>
-  function guardarNombreLS(nombre) {
-  localStorage.setItem('nombre', nombre)
-  }
-  function obtenerNombre(){
-    const mensaje = document.querySelector('.incorrecto');
-    const btnIngresar = document.querySelector('.nombreEnviado');
-    const valorInput = document.querySelector('.input-nombre');
-    //Eventos cuando dan click a ingresar
-    btnIngresar.addEventListener('click', (event) => {
-    event.preventDefault(); // evita que se recargue la página
-    const valorBuscado = valorInput.value.toLowerCase().trim();
-    console.log(valorBuscado);
-    if (valorBuscado.length <= 2) {
-      console.log(valorBuscado);
-      mensaje.textContent = "Error en nombre";
-      valorInput.value = "";
-      return;
-    }
-  guardarNombreLS(valorBuscado);
-  window.location.href = "/vistas/listadoProductos.html";
-  });
-  }
-  const toggle = document.getElementById('modoToggle');
-  const label = toggle.nextElementSibling;
-  const body = document.body;
-  // Al cargar, aplicar modo guardado
-  const modoGuardado = localStorage.getItem('modo');
-  if (modoGuardado === 'oscuro') {
-    body.classList.add('dark-mode');
-    toggle.checked = true;
-    label.textContent = '☀️';
-  }
-  toggle.addEventListener('change', () => {
-    body.classList.toggle('dark-mode');
-    const esOscuro = body.classList.contains('dark-mode');
-    localStorage.setItem('modo', esOscuro ? 'oscuro' : 'claro');
-    label.textContent = esOscuro ? '☀️' : '🌙';
-  });
-obtenerNombre();
-</script>
+<script src="/js/login.js"></script>
+<script src="/js/modoOscuro.js"></script>
 </body>
 </html>

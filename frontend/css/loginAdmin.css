@@ -1,0 +1,33 @@
+html, body {
+    height: 100vh;
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    overflow: hidden;
+    background-image: url('/assets/Trama2.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-color: #4200f700;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+}
+main {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.logo {
+    max-width: 200px;
+    }
+.mensaje {
+    margin-top: 1rem;
+    font-weight: 600;
+}
+marquee {
+    color: var(--marquee-color, black);
+}
+body.dark-mode marquee {
+    color: white;
+}

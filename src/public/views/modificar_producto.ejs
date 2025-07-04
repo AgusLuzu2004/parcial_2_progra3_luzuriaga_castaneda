@@ -52,63 +52,7 @@
       <p id="mensaje" class="mt-3 fw-bold"></p>
     </form>
   </div>
-  <script>
-    const form = document.getElementById("form-editar");
-    const mensaje = document.getElementById("mensaje");
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const id = document.getElementById("producto-id").value;
-      const sku = document.getElementById("sku").value.trim();
-      const nombre = document.getElementById("nombre").value.trim();
-      const precio_normal = parseFloat(document.getElementById("precio_normal").value);
-      const categoria = document.getElementById('categoria').value;
-      const imagen = document.getElementById("imagen").value.trim();
-      const activo = document.getElementById("activo").checked;
-      const datosActualizados = { sku, nombre, precio_normal, categoria, imagen, activo };
-      try {
-        const response = await fetch(`/api/productos/${id}`, {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(datosActualizados),
-        });
-        const result = await response.json();
-        if (response.ok) {
-          mensaje.textContent = "✅ Producto actualizado correctamente";
-          mensaje.style.color = "green";
-          setTimeout(() => {
-            window.location.href = "/admin/dashboard";
-        }, 500);
-        } else {
-          mensaje.textContent = `❌ Error: ${result.message || "No se pudo actualizar"}`;
-          mensaje.style.color = "red";
-        }
-      } catch (err) {
-        mensaje.textContent = "❌ Error de red o servidor";
-        mensaje.style.color = "red";
-        console.error(err);
-      }
-    });
-  </script>
-  <script>
-    const toggle = document.getElementById('modoToggle');
-    const label = toggle?.nextElementSibling;
-    const body = document.body;
-    const modoGuardado = localStorage.getItem('modo');
-    if (modoGuardado === 'oscuro') {
-      body.classList.add('dark-mode');
-      if (toggle) {
-        toggle.checked = true;
-        label.textContent = '☀️';
-      }
-    }
-    toggle?.addEventListener('change', () => {
-      body.classList.toggle('dark-mode');
-      const esOscuro = body.classList.contains('dark-mode');
-      localStorage.setItem('modo', esOscuro ? 'oscuro' : 'claro');
-      label.textContent = esOscuro ? '☀️' : '🌙';
-    });
-  </script>
+  <script src="/js/modificarProducto.js"></script>
+  <script src="/js/modoOscuro.js"></script>
 </body>
 </html>

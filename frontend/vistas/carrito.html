@@ -56,24 +56,7 @@
       </div>
     </div>
   </div>
-  <script>
-  const toggle = document.getElementById('modoToggle');
-  const label = toggle.nextElementSibling;
-  const body = document.body;
-  // Al cargar, aplicar modo guardado
-  const modoGuardado = localStorage.getItem('modo');
-  if (modoGuardado === 'oscuro') {
-    body.classList.add('dark-mode');
-    toggle.checked = true;
-    label.textContent = '☀️';
-  }
-  toggle.addEventListener('change', () => {
-    body.classList.toggle('dark-mode');
-    const esOscuro = body.classList.contains('dark-mode');
-    localStorage.setItem('modo', esOscuro ? 'oscuro' : 'claro');
-    label.textContent = esOscuro ? '☀️' : '🌙';
-  });
-  </script>
+  <script src="/js/modoOscuro.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="..\js\carrito.js"></script>
 </body>

@@ -51,63 +51,7 @@
       <p id="mensaje" class="mt-3 fw-bold"></p>
     </form>
   </div>
-  <script>
-    const form = document.getElementById('form-crear');
-    const mensaje = document.getElementById('mensaje');
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const sku = document.getElementById('sku').value.trim();
-      const nombre = document.getElementById('nombre').value.trim();
-      const precio_normal = parseFloat(document.getElementById('precio_normal').value);
-      const categoria = document.getElementById('categoria').value;
-      const imagen = document.getElementById('imagen').value.trim();
-      const activo = document.getElementById('activo').checked;
-      const nuevoProducto = {sku, nombre, precio_normal, categoria, imagen, activo};
-      try {
-        const response = await fetch('/api/productos', {
-          method: 'POST',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify(nuevoProducto),
-        });
-        const result = await response.json();
-        if (response.ok) {
-          mensaje.textContent = '✅ Producto creado correctamente';
-          mensaje.style.color = 'green';
-          // Opcional: limpiar el formulario después de crear
-          form.reset();
-          // Opcional: redirigir después de 3 seg a dashboard
-          setTimeout(() => {
-            window.location.href = '/admin/dashboard';
-          }, 500);
-        } else {
-          mensaje.textContent = `❌ Error: ${result.message || 'No se pudo crear el producto'}`;
-          mensaje.style.color = 'red';
-        }
-      } catch (error) {
-        mensaje.textContent = '❌ Error de red o servidor';
-        mensaje.style.color = 'red';
-        console.error(error);
-      }
-    });
-  </script>
-  <script>
-    const toggle = document.getElementById('modoToggle');
-    const label = toggle?.nextElementSibling;
-    const body = document.body;
-    const modoGuardado = localStorage.getItem('modo');
-    if (modoGuardado === 'oscuro') {
-      body.classList.add('dark-mode');
-      if (toggle) {
-        toggle.checked = true;
-        label.textContent = '☀️';
-      }
-    }
-    toggle?.addEventListener('change', () => {
-      body.classList.toggle('dark-mode');
-      const esOscuro = body.classList.contains('dark-mode');
-      localStorage.setItem('modo', esOscuro ? 'oscuro' : 'claro');
-      label.textContent = esOscuro ? '☀️' : '🌙';
-    });
-  </script>
+  <script src="/js/altaProducto.js"></script>
+  <script src="/js/modoOscuro.js"></script>
 </body>
 </html>
