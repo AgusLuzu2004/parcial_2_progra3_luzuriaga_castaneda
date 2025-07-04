@@ -2,7 +2,7 @@ console.log("conectado");
 
 let productosGlobal = [];
 let paginaActual = 1;
-const productosPorPagina = 6;
+const productosPorPagina = 15;
 
 function cargaInicial(productos) {
   const listaProductos = document.querySelector('.product-grid');
