@@ -54,45 +54,14 @@ app.get("/ticket", (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/vistas/ticket.html"));
 });
 
+// Vistas Admin (render EJS)
+app.use("/admin", adminRoutes);
+
+//apis a consumir
 app.use("/api/pedidos", pedidosRouter);
 app.use("/api/productos", productosRouter);
 app.use("/api/detalle_pedido", detallePedidoRouter);
 app.use('/api/admin', adminRoutes);
-
-app.get('/admin/dashboard', async (req, res) => {
-  try {
-    const response = await fetch("http://localhost:5000/api/productos");
-    const data = await response.json();
-    const productos = data.payload || [];
-    res.render('dashboard_admin', {
-      usuario: 'admin123',
-      productos
-    });
-  } catch (error) {
-    console.error("Error al cargar productos:", error);
-    res.status(500).send("Error al cargar el dashboard");
-  }
-});
-
-app.get('/admin/productos/:id/editar', async (req, res) => {
-  const {id} = req.params;
-
-  try {
-    const response = await fetch(`http://localhost:5000/api/productos/${id}`);
-    const result = await response.json();
-
-    const producto = result.payload;
-
-    res.render('modificar_producto', {producto});
-  } catch (error) {
-    console.error("❌ Error al obtener producto:", error.message);
-    res.status(500).send("Error al obtener el producto");
-  }
-});
-
-app.get('/admin/productos/nuevo-producto', (req, res) => {
-  res.render('alta_producto'); 
-});
 
 //listeners
 initializeConnection();
