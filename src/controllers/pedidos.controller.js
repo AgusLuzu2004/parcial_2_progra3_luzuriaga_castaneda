@@ -3,13 +3,8 @@ import {getPedidos, create, findPk, update} from "../services/pedidos.service.js
 
 export const getAllPedidos = async (req, res) => {
     try {
-        let {limit, offset} = req.query;
-        const parsedLimit = parseInt(limit);
-        const parsedOffset = parseInt(offset);
-        const finalLimit = isNaN(parsedLimit) ? 10 : parsedLimit;
-        const finalOffset = isNaN(parsedOffset) ? 0 : parsedOffset;
-        const pedidos = await getPedidos({limit: finalLimit, offset: finalOffset});
-        res.status(200).json({message: "Lista de pedidos", payload: {limit: finalLimit, offset: finalOffset, ...pedidos}});
+        const pedidos = await getPedidos();
+        res.status(200).json({message: "Lista de pedidos", payload: pedidos});
     } catch (error) {
         res.status(500).json({message: "Error interno del servidor", err: error.message});
     }

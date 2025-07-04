@@ -1,5 +1,9 @@
 console.log("conectado");
 
+let productosGlobal = [];
+let paginaActual = 1;
+const productosPorPagina = 6;
+
 function cargaInicial(productos) {
   const listaProductos = document.querySelector('.product-grid');
   const cartCant = document.querySelector('.cart-badge');
@@ -7,7 +11,13 @@ function cargaInicial(productos) {
 
   listaProductos.innerHTML = "";
 
-  productos.forEach((p) => {
+  const productosActivos = productos.filter(p => p.activo === true || p.activo === 1);
+
+  const inicio = (paginaActual - 1) * productosPorPagina;
+  const fin = inicio + productosPorPagina;
+  const productosPagina = productosActivos.slice(inicio, fin);
+
+  productosPagina.forEach((p) => {
     const div = document.createElement('div');
     div.className = "product-card";
 
@@ -55,6 +65,8 @@ function cargaInicial(productos) {
     subtotalAcum.textContent = subtotalGuardado;
   }
 
+  renderPaginador(productos);
+
 }
 
 function agregarCarrito(producto) {
@@ -68,6 +80,31 @@ function agregarCarrito(producto) {
 
   guardarCarritoLS();
   //renderCarrito();
+}
+
+function renderPaginador(productos) {
+  const totalPaginas = Math.ceil(productos.length / productosPorPagina);
+  let paginador = document.querySelector('.paginador');
+
+  if (!paginador) {
+    paginador = document.createElement('div');
+    paginador.className = "paginador d-flex justify-content-center mt-4 gap-2";
+    document.querySelector('main').appendChild(paginador);
+  }
+
+  paginador.innerHTML = "";
+
+  for (let i = 1; i <= totalPaginas; i++) {
+    const btn = document.createElement('button');
+    btn.className = "btn btn-outline-primary";
+    btn.textContent = i;
+    if (i === paginaActual) btn.classList.add('active');
+    btn.addEventListener('click', () => {
+      paginaActual = i;
+      cargaInicial(productosGlobal, i);
+    });
+    paginador.appendChild(btn);
+  }
 }
 
 /*  
@@ -136,7 +173,8 @@ function init() {
     .then(productos => {
       filtro(productos.payload)
       bienvenida();
-      cargaInicial(productos.payload);
+      productosGlobal = productos.payload;
+      cargaInicial(productosGlobal, 1);
       salir();
       // filtro(productos);
       //renderCarrito();

@@ -81,9 +81,9 @@ document.querySelector(".imprimirTicket").addEventListener("click", () => {
     const opciones = {
         margin:       0.5,
         filename:     `ticket_${Date.now()}.pdf`,
-        image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2 },
-        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+        image:        {type: 'jpeg', quality: 0.98},
+        html2canvas:  {scale: 2},
+        jsPDF:        {unit: 'in', format: 'letter', orientation: 'portrait'}
     };
 
     html2pdf().set(opciones).from(contenido).save();
