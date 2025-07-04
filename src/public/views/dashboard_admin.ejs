@@ -13,7 +13,7 @@
         }
     </style>
     <link rel="stylesheet" href="../css/listadoProductos.css">
-    <link rel="stylesheet" href="frontend\css\modoOscuro.css"> //ojo
+    <link rel="stylesheet" href="frontend\css\modoOscuro.css">
 </head>
 <body class="bg-light">
     <nav class="navbar py-4">
@@ -29,7 +29,10 @@
     </nav>
   <div class="container my-5">
     <h2 class="mb-4 text-center">Productos Registrados</h2>
+    <div>
 
+        <a href="/admin/productos/nuevo-producto" class="btn btn-success w-25">Agregar producto</a>
+    </div>
 
     <table class="table table-bordered table-hover">
       <thead class="table-dark">
@@ -55,8 +58,8 @@
             <td><%= producto.categoria %></td>
             <td><%= producto.activo ? 'Si' : 'No' %></td>
             <td>
-              <button class="btn btn-sm btn-warning me-2" onclick="editarProducto(<%= producto.id %>)">Editar</button>
-              <button class="btn btn-sm btn-danger" onclick="inactivarProducto(<%= producto.id %>)">Inactivar</button>
+              <button class="btn btn-sm btn-warning me-2 w-100" onclick="editarProducto(<%= producto.id %>)">Editar</button>
+              <button class="btn btn-sm btn-danger w-100" onclick="inactivarProducto(<%= producto.id %>)">Inactivar</button>
             </td>
           </tr>
         <% }) %>

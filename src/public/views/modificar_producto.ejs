@@ -28,9 +28,13 @@
       </div>
 
       <div class="mb-3">
-        <label for="categoria" class="form-label">Categoría</label>
-        <input type="text" class="form-control" id="categoria" value="<%= producto.categoria %>" required>
-      </div>
+    <label for="categoria" class="form-label">Categoría</label>
+    <select class="form-control" id="categoria" required>
+        <option value="">-- Selecciona una categoría --</option>
+        <option value="River plate">River plate</option>
+        <option value="Boca juniors">Boca juniors</option>
+    </select>
+    </div>
 
       <div class="mb-3">
         <label for="imagen" class="form-label">Ruta de Imagen</label>
@@ -59,7 +63,7 @@
       const sku = document.getElementById("sku").value.trim();
       const nombre = document.getElementById("nombre").value.trim();
       const precio_normal = parseFloat(document.getElementById("precio_normal").value);
-      const categoria = document.getElementById("categoria").value.trim();
+      const categoria = document.getElementById('categoria').value;
       const imagen = document.getElementById("imagen").value.trim();
       const activo = document.getElementById("activo").checked;
 

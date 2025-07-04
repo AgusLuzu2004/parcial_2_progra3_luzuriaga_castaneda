@@ -75,6 +75,7 @@ app.get('/admin/dashboard', async (req, res) => {
 });
 
 
+
 app.get('/admin/productos/:id/editar', async (req, res) => {
   const { id } = req.params;
 
@@ -90,6 +91,12 @@ app.get('/admin/productos/:id/editar', async (req, res) => {
     res.status(500).send("Error al obtener el producto");
   }
 });
+
+app.get('/admin/productos/nuevo-producto', (req, res) => {
+  res.render('alta_producto'); 
+});
+
+
 
 
 //listeners
