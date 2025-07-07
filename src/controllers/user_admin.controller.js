@@ -12,6 +12,7 @@ export const login = async (req, res) => {
     console.log("Contraseña:", contrasena);
     try {
         const admin = await loginAdmin(usuario, contrasena);
+        req.session.admin = admin.usuario;
         // Responder JSON para el fetch (POST /api/admin/)
         return res.status(200).json({usuario: admin.usuario});
         

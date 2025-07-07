@@ -26,3 +26,7 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
         mensaje.style.color = 'red';
     }
 });
+function autocompletar() {
+    document.getElementById("usuario").value = "administrador";
+    document.getElementById("contrasena").value = "21506005";
+}

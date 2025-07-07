@@ -1,4 +1,5 @@
 import {getProductos,findPk, desactivate, create, update} from "../services/producto.service.js";
+import fs from "fs";
 
 export const getAllProductos = async (req, res) => {
     try {
@@ -22,24 +23,53 @@ export const findProducto = async (req, res) => {
 
 export const createProducto = async (req, res) => {
     try {
-        const {sku, nombre, activo, precio_normal, categoria, imagen} = req.body;
+        const {sku, nombre, precio_normal, categoria} = req.body;
+        const activo = req.body.activo === "on";
+        let imagen = req.body.imagen;
+        if (req.file && req.file.filename) {
+            imagen = "/img/" + req.file.filename;
+        } else {
+            imagen = req.body.imagen || null;
+        }
+        if (req.fileAlreadyExists && req.file) {
+            fs.unlink(req.file.path, (err) => {
+                if (err) console.error("❌ Error al eliminar imagen duplicada:", err.message);
+                else console.log("🧹 Imagen duplicada eliminada correctamente:", ruta);
+            });
+        }
         const newProducto = await create({sku, nombre, activo, precio_normal, categoria, imagen});
         if (!sku || !nombre || !activo || !precio_normal || !categoria || !imagen) return res.status(400).json({message: "Campos inválidos"});
         res.status(201).json({message: "Producto creado con exito", payload: newProducto});
     } catch (error) {
+        console.error("❌ Error al crear producto:", error);
         res.status(500).json({message: "Error interno del servidor", err: error.message});
     }
 };
 
 export const updateProducto = async (req, res) => {
     const {id} = req.params;
-    const {nombre, precio_normal, categoria, activo, imagen, sku} = req.body;
+    const {sku, nombre, precio_normal, categoria} = req.body;
+    const activo = req.body.activo === "on";
+    let imagen = req.body.imagen;
+    if (req.fileAlreadyExists && req.file) {
+        fs.unlink(req.file.path, (err) => {
+            if (err) console.error("❌ Error al eliminar imagen duplicada:", err.message);
+            else console.log("🧹 Imagen duplicada eliminada correctamente:", ruta);
+        });
+    }
+    if (req.file && req.file.filename) {
+        imagen = "/img/" + req.file.filename;
+    } else {
+        imagen = req.body.imagen || null;
+    }
+    console.log("📦 Body recibido:", req.body);
+    console.log("📷 Imagen recibida:", req.file);
     // Validación
-    if (!nombre || !precio_normal || !categoria || !sku) {
-        return res.status(400).json({ message: "Todos los campos requeridos" });
+    if (!sku || !nombre || !precio_normal || !categoria) {
+        return res.status(400).json({message: "Todos los campos requeridos"});
     }
     try {
-        const producto = {nombre, precio_normal, categoria, activo, imagen, sku};
+        const producto = {sku, nombre, precio_normal, categoria, activo, imagen};
         const resultado = await update(producto, id);
         if (resultado[0] === 0) {
             return res.status(404).json({message: "Producto no encontrado o sin cambios"});

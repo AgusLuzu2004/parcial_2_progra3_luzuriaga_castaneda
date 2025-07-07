@@ -3,20 +3,12 @@ const mensaje = document.getElementById('mensaje');
 
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const sku = document.getElementById('sku').value.trim();
-    const nombre = document.getElementById('nombre').value.trim();
-    const precio_normal = parseFloat(document.getElementById('precio_normal').value);
-    const categoria = document.getElementById('categoria').value;
-    const imagen = document.getElementById('imagen').value.trim();
-    const activo = document.getElementById('activo').checked;
-
-    const nuevoProducto = { sku, nombre, precio_normal, categoria, imagen, activo };
+    const formData = new FormData(form);
 
     try {
         const response = await fetch('/api/productos', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(nuevoProducto),
+            body: formData,
         });
         const result = await response.json();
         if (response.ok) {
