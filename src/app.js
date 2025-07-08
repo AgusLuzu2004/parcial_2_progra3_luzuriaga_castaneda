@@ -30,7 +30,8 @@ const initializeConnection = async () => {
 
 // middlewares
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "../frontend"))); //da acceso a todos los archivos 
+app.use(express.static(path.join(__dirname, "../frontend"))); //da acceso a todos los archivos
+app.use(express.static(path.join(__dirname, "/public")));
 app.use("/img", express.static(path.join(__dirname, "/public/img")));
 app.use(express.urlencoded({extended: true}));
 
