@@ -55,8 +55,8 @@ nombre de carpeta/
 
 ### 1. Clonar el repositorio
 
-`git clone https://github.com/usuario/proyecto-autoservicio.git
-cd proyecto-autoservicio`
+`git clone https://github.com/AgusLuzu2004/parcial_2_progra3_luzuriaga_castaneda.git
+cd parcial_2_progra3_luzuriaga_castaneda`
 
 ### 2. Instalar dependencias
 
