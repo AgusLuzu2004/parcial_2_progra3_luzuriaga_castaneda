@@ -23,7 +23,8 @@ nombre de carpeta/
 │   ├── models/              # Modelos Sequelize
 │   ├── services/            # Servicios de base de datos
 │   ├── config/              # Configuraciones (DB, .env)
-│   ├── middlewares/          # Middlewares personalizados
+│   ├── middlewares/         # Middlewares personalizados
+│   ├── utils/               # Middlewares personalizados
 │   ├── public/
 │   │   ├── views/           # Vistas EJS para el admin
 │   │   ├── img/             # Imágenes subidas
@@ -32,6 +33,7 @@ nombre de carpeta/
 │   ├── vistas/              # HTML del cliente
 │   ├── js/                  # Lógica del cliente
 │   ├── css/                 # Estilos cliente
+│   ├── assets/              # Imágenes oficiales del sistema
 ├── .env
 ├── package.json
 ├── crearAdmin.js           # Script para crear el admin
