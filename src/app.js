@@ -14,7 +14,6 @@ import session from "express-session";
 const app = express();
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, "public/views"));
-console.log(__dirname);
 
 app.set("PORT", envs.port || 5000);
 

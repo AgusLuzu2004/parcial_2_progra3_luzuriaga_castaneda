@@ -1,6 +1,5 @@
 console.log("conectado");
 
-let productosGlobal = [];
 let paginaActual = 1;
 const productosPorPagina = 15;
 
@@ -21,19 +20,8 @@ function cargaInicial(productos) {
     const div = document.createElement('div');
     div.className = "product-card";
 
-    // Buscamos si este producto ya está en el carrito
     const itemEnCarrito = carrito.find(prod => prod.id === p.id);
     const cantidad = itemEnCarrito ? itemEnCarrito.cantidad: 0;
-
-  //    {
-  //   "id": 1,
-  //   "sku": "RLPRP22062",
-  //   "nombre": "Reloj De Pared River Plate (28Cm)  Rjpar-Rp01",
-  //   "activo": 1,
-  //   "precio_normal": 10100,
-  //   "categoria": "River plate",
-  //   "imagen": "/img/producto_9532_1.jpg"
-  // },
 
     div.innerHTML = `
       <img src="${p.imagen}" alt="${p.nombre}">
@@ -58,13 +46,6 @@ function cargaInicial(productos) {
     });
   });
 
-  // Al final de cargar productos, actualizá el badge del carrito
-  cartCant.textContent = carrito.reduce((acc, va) => acc + va.cantidad, 0);
-  const subtotalGuardado = localStorage.getItem('subtotal');
-  if (subtotalGuardado && subtotalAcum) {
-    subtotalAcum.textContent = subtotalGuardado;
-  }
-
   renderPaginador(productos);
 
 }
@@ -75,11 +56,10 @@ function agregarCarrito(producto) {
 
     itemEnCarrito.cantidad += 1;
   } else {
-    carrito.push({...producto, cantidad: 1,img: producto.imagen});
+    carrito.push({...producto, cantidad: 1, img: producto.imagen});
   }
 
   guardarCarritoLS();
-  //renderCarrito();
 }
 
 function renderPaginador(productos) {
@@ -101,7 +81,7 @@ function renderPaginador(productos) {
     if (i === paginaActual) btn.classList.add('active');
     btn.addEventListener('click', () => {
       paginaActual = i;
-      cargaInicial(productosGlobal, i);
+      cargaInicial(productos.payload, i);
     });
     paginador.appendChild(btn);
   }
@@ -171,13 +151,10 @@ function init() {
   fetch("http://localhost:5000/api/productos")
     .then(res => res.json())
     .then(productos => {
-      filtro(productos.payload)
+      filtro(productos.payload);
       bienvenida();
-      productosGlobal = productos.payload;
-      cargaInicial(productosGlobal, 1);
+      cargaInicial(productos.payload, 1);
       salir();
-      // filtro(productos);
-      //renderCarrito();
     });
 }
 

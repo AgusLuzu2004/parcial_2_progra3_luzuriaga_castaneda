@@ -20,14 +20,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         // Mostrar cliente
         document.getElementById("pedido-nombre").textContent = pedido.cliente;
 
-        // Formatear fecha a dd/mm/aaaa
         const fecha = new Date(pedido.fecha);
         const fechaFormateada = fecha.toLocaleDateString("es-ES");
-        // Si querés solo fecha, sin hora, usa arriba. Si necesitas hora también, usa toLocaleString()
-
-        // Mostrar fecha (podés crear un span en el HTML para mostrar fecha si querés)
-        // Ejemplo: <strong>Fecha:</strong> <span id="pedido-fecha"></span>
-        // Aquí lo agregamos al mismo div si querés:
         const divDatos = document.querySelector(".card-body > div.mb-3");
         if (!document.getElementById("pedido-fecha")) {
             const spanFecha = document.createElement("div");
@@ -40,7 +34,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         // Mostrar total (igual que abajo, lo ponemos aquí para no pisar luego)
         document.getElementById("total-general").textContent = "$" + pedido.total.toLocaleString();
 
-        // 2️⃣ Obtener detalles del pedido para la tabla
         const resDetalles = await fetch(`http://localhost:5000/api/detalle_pedido/${pedidoId}`);
         if (!resDetalles.ok) throw new Error("No se pudieron cargar los detalles");
 
@@ -65,9 +58,6 @@ document.addEventListener("DOMContentLoaded", async () => {
             `;
             tbody.appendChild(tr);
         });
-
-        // Solo si querés recalcular total basado en detalles (opcional)
-        // document.getElementById("total-general").textContent = "$" + totalCalc.toLocaleString();
 
     } catch (error) {
         console.error("Error cargando el pedido o sus detalles:", error);
