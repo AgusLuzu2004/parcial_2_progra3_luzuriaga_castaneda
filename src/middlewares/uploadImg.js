@@ -2,8 +2,6 @@ import multer from "multer";
 import path from "path";
 import fs from "fs";
 
-// Para obtener __dirname en ES Modules
-
 // Configurar almacenamiento
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
