@@ -8,7 +8,6 @@ import sequelize from "./config/db-sequelize.js";
 import envs from "./config/envs.js";
 import cors from "cors";
 import adminRoutes from './routes/user_admin.route.js';
-import session from "express-session";
 
 //settings
 const app = express();
