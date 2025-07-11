@@ -6,7 +6,7 @@ export const listarDetallesPorPedido = async (req, res) => {
         const detalles = await getDetallesByPedidoId(pedidoId);
         res.json({message: `Detalles del pedido ${pedidoId}`, payload: detalles});
     } catch (error) {
-        res.status(500).json({ message: "Error al obtener detalles por pedido", error: error.message });
+        res.status(500).json({message: "Error al obtener detalles por pedido", error: error.message});
     }
 };
 

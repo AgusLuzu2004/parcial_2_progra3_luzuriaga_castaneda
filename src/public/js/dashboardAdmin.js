@@ -9,7 +9,7 @@ async function inactivarProducto(id) {
     try {
         const response = await fetch(`/api/productos/desactivar/${id}`, {
             method: 'PUT',
-            headers: { 'Content-Type': 'application/json' }
+            headers: {'Content-Type': 'application/json'}
         });
         const result = await response.json();
         if (response.ok) {
