@@ -34,15 +34,6 @@ app.use(express.static(path.join(__dirname, "/public")));
 app.use("/img", express.static(path.join(__dirname, "/public/img")));
 app.use(express.urlencoded({extended: true}));
 
-app.use(session({
-  secret: "secreto_autoservicio",
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-    maxAge: 60 * 60 * 1000 // 1 hora
-  }
-}));
-
 app.use(cors({
   origin: "*"
 }));
